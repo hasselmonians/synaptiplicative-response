@@ -1,29 +1,37 @@
-% test a simple model of the dendrite based on Behabadi et al. 2012
-% proximal-distal, time-invariant 2-compartment model
+%% set up the model of a CA3 cell from Traub et al. 1991
+% https://www.physiology.org/doi/pdf/10.1152/jn.1991.66.2.635
 
 % instantiate the xolotl object
 x = xolotl;
 
-% create the compartments
-x.add('compartment', 'proximal', 'Cm', 10, 'A', 0.01);
-% x.add('compartment', 'distal', 'Cm', 10, 'radius', 0.001, 'len', 0.010);
-x.add('compartment', 'presynaptic');
+% instantiate the apical dendrite compartments
+x.add('compartment', 'ApicalDendrite', 'Cm', 30, 'radius', 2.89/1e3, 'len', 120/1e3);
+x.ApicalDendrite.add('traub/NaV', 0, 'E', 50);
+% x.ApicalDendrite.add('traub/Cal', 0, 'E', 30);
+x.ApicalDendrite.add('traub/Kd', 'gbar', 0, 'E', -80);
+x.ApicalDendrite.add('traub/Kahp', 'gbar', 0, 'E', -80);
+x.ApicalDendrite.add('traub/Kc', 'gbar', 0, 'E', -80);
+x.ApicalDendrite.add('traub/ACurrent', 'gbar', 0, 'E', -80);
+x.ApicalDendrite.add('Leak', 'gbar', 1, 'E', -50);
+x.slice('ApicalDendrite', 10);
 
-% add leak currents
-x.proximal.add('Leak', 'gbar', 0, 'E', -70);
-% x.distal.add('Leak', 'gbar', @() 4, 'E', -70);
+% instantiate the basal dendrite compartments
+x.add('compartment', 'BasalDendrite', 'Cm', 30, 'radius', 4.23/1e3, 'len', 125/1e3);
+x.BasalDendrite.add('traub/NaV', 0, 'E', 50);
+% x.BasalDendrite.add('traub/Cal', 40, 'E', 30);
+x.BasalDendrite.add('traub/Kd', 'gbar', 0, 'E', -80);
+x.BasalDendrite.add('traub/Kahp', 'gbar', 0, 'E', -80);
+x.BasalDendrite.add('traub/Kc', 'gbar', 0, 'E', -80);
+x.BasalDendrite.add('traub/ACurrent', 'gbar', 0, 'E', -80);
+x.BasalDendrite.add('Leak', 'gbar', 1, 'E', -50);
+x.slice('BasalDendrite', 8);
 
-% connect the compartments
-% x.connect('proximal', 'distal', 'Axial', 'gmax', @() 2.5);
-
-% add synapses from controlling compartment to proximal and distal compartments
-x.connect('presynaptic', 'proximal', 'borgers/NMDAergic', 'gmax', 100, 'E', 0);
-% x.connect('presynaptic', 'distal', 'borgers/NMDAergic', 'gmax', @() 0.0, 'E', 0);
-
-% voltage clamp the presynaptic compartment
-V_clamp = NaN * x.integrate;
-nSteps = x.t_end / x.dt;
-spike_start = round(0.2*nSteps);
-spike_stop = spike_start + spike_start;
-V_clamp(:,1) = -60;
-V_clamp(spike_start:spike_stop, 1) = 50;
+% instantiate the somatic compartment
+x.add('compartment', 'Soma', 'Cm', 30, 'radius', 2.42/1e3, 'len', 110/1e3);
+x.Soma.add('traub/NaV', 300, 'E', 50);
+% x.Soma.add('traub/Cal', 40, 'E', 30);
+x.Soma.add('traub/Kd', 'gbar', 150, 'E', -80);
+x.Soma.add('traub/Kahp', 'gbar', 8, 'E', -80);
+x.Soma.add('traub/Kc', 'gbar', 100, 'E', -80);
+x.Soma.add('traub/ACurrent', 'gbar', 50, 'E', -80);
+x.Soma.add('Leak', 'gbar', 1, 'E', -50);
