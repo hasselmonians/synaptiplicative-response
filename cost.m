@@ -33,9 +33,9 @@ function c = cost(x)
 
     %% Evalulate the responses
 
-    R1          = responseHeight(V1, V1(pulseStart-1, strcmp(x.find('compartment', 'Dendrite2'))));
-    R2          = responseHeight(V2, V2(pulseStart-1, strcmp(x.find('compartment', 'Dendrite3'))));
-    R12         = responseHeight(V2, V2(pulseStart-1, strcmp(x.find('compartment', 'Dendrite3'))));
+    R1          = responseHeight(V1, V1(pulseStart-2, strcmp(x.find('compartment', 'Dendrite2'))));
+    R2          = responseHeight(V2, V2(pulseStart-2, strcmp(x.find('compartment', 'Dendrite3'))));
+    R12         = responseHeight(V2, V2(pulseStart-2, strcmp(x.find('compartment', 'Dendrite3'))));
 
     c = (R12 - R1*R2)^2;
 
