@@ -16,7 +16,7 @@ function x = make_dendriteModel(N, postsynaptic)
     %% Instantiate compartments and conductances
 
     % add basilar dendrite compartment
-    x.add('compartment', 'Dendrite', 'Cm', 30, 'radius', 2.42/1e3, 'len', N*110/1e3);
+    x.add('compartment', 'Dendrite', 'Cm', 30, 'radius', 4/1e3, 'len', N*110/1e3);
 
     % add conductances with no maximal conductance
     % maximal conductance values are arbitrary
@@ -40,5 +40,5 @@ function x = make_dendriteModel(N, postsynaptic)
 
     %% Connect presynaptic compartments to postsynaptic compartments
 
-    x.connect('Presynaptic1', ['Dendrite', postsynaptic{1}], 'borgers/NMDAergic', 'gbar', 0, 'Mg', 2, 'tau_d', 2, 'tau_r', 10);
-    x.connect('Presynaptic2', ['Dendrite', postsynaptic{2}], 'borgers/NMDAergic', 'gbar', 0, 'Mg', 2, 'tau_d', 2, 'tau_r', 10);
+    x.connect('Presynaptic1', ['Dendrite', postsynaptic{1}], 'borgers/NMDAergic', 'gmax', 0, 'Mg', 2, 'tau_d', 2, 'tau_r', 10);
+    x.connect('Presynaptic2', ['Dendrite', postsynaptic{2}], 'borgers/NMDAergic', 'gmax', 0, 'Mg', 2, 'tau_d', 2, 'tau_r', 10);
