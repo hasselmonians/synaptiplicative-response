@@ -9,6 +9,8 @@ function x = model()
 
   % add only a leak current
   x.Dendrite.add('Leak', 'gbar', 0.1, 'E', -50);
+  x.Dendrite.add('traub/NaV', 'gbar', 0.1, 'E', -50);
+  x.Dendrite.add('traub/Kd', 'gbar', 0.1, 'E', -50);
 
   % slice the compartment
   x.slice('Dendrite', N);
@@ -22,13 +24,5 @@ function x = model()
 
   x.connect('Presynaptic1', 'Dendrite1', 'borgers/NMDAergic', 'gmax', 0, 'Mg', 2, 'tau_d', 2, 'tau_r', 10);
   x.connect('Presynaptic2', 'Dendrite2', 'borgers/NMDAergic', 'gmax', 0, 'Mg', 2, 'tau_d', 2, 'tau_r', 10);
-
-  %% Bookkeeping
-
-  % determine the steady-state
-  x.t_end = 10e3;
-  x.integrate;
-  x.t_end = 100; % only need a short time to measure EPSP
-  x.snapshot('steadystate');
 
 end
