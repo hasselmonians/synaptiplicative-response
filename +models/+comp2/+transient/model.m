@@ -9,8 +9,8 @@ function x = model()
 
   % add only a leak current
   x.Dendrite.add('Leak', 'gbar', 0.1, 'E', -50);
-  x.Dendrite.add('traub/ACurrent', 'gbar', 0.1, 'E', -50);
-  x.Dendrite.add('soplata/HCurrent', 'gbar', 0.1, 'E', -50);
+  x.Dendrite.add('soplata/thalamocortical/HCurrent', 'gbar', 0.1, 'E', -40);
+  x.Dendrite.add('soplata/MCurrent', 'gbar', 0.1, 'E', -100);
 
   % slice the compartment
   x.slice('Dendrite', N);
