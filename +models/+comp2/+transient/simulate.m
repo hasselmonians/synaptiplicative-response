@@ -28,7 +28,7 @@ end % function
 
 function r = simulation_core(x, nSteps, comps, trial, pulseStart, pulseStop, pulseHeight)
   % reset to steady-state
-  x.reset('steadystate');
+  x.reset('steady-state');
 
   % set the voltage clamp in the correct presynaptic compartments
   V_clamp     = NaN(nSteps, length(comps));
