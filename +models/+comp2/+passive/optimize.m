@@ -21,7 +21,7 @@
 x           = models.comp2.passive.model();
 p           = xfit('particleswarm');
 p.x         = x;
-p.sim_func  = @models.comp2.passive.simulation;
+p.sim_func  = @models.comp2.passive.simulate;
 
 % parameters
 p.parameter_names = [x.find('*gbar'); x.find('*NMDAergic*gmax')];

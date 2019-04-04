@@ -1,5 +1,8 @@
 function [cost, R] = simulation(x, ~, ~)
 
+  % reset the object to keep xolotl parameters consistent
+  x.reset('steadystate');
+
   % preallocate output variables
   cost        = 0;
   response    = zeros(3,1);
@@ -41,8 +44,6 @@ function r = simulation_core(x, nSteps, comps, trial, pulseStart, pulseStop, pul
     V_clamp(pulseStart:pulseStop, strcmp(comps, 'Presynaptic1')) = pulseHeight;
     V_clamp(pulseStart:pulseStop, strcmp(comps, 'Presynaptic2')) = pulseHeight;
   end
-
-  keyboard
 
   % clamp the specified compartments
   x.V_clamp   = V_clamp;
