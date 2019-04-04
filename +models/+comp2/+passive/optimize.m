@@ -19,6 +19,8 @@
 %% Set up xolotl and xfit
 
 x           = models.comp2.passive.model();
+x.t_end     = 100; % ms, only need to record one EPSP
+
 p           = xfit('particleswarm');
 p.x         = x;
 p.sim_func  = @models.comp2.passive.simulate;
