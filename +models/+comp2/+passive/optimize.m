@@ -20,7 +20,7 @@
 
 x           = models.comp2.passive.model();
 p           = xfit('particleswarm');
-
+p.x         = x;
 p.sim_func  = @models.comp2.passive.simulation;
 
 % parameters
@@ -35,7 +35,7 @@ p.options.SwarmSize = 24;
 %% Compute the steady-state
 
 x.t_end     = 5e3;
-x.integrate;
+V = x.integrate;
 x.snapshot('steady-state');
 
 %% Initialize outputs
@@ -48,7 +48,7 @@ cost        = NaN(1, nSims);
 
 %% Fit parameters
 
-filename    = ['data-comp2-passive-' corelib.getComputerName '.mat']
+filename    = ['data-comp2-passive-' corelib.getComputerName '.mat'];
 
 if exist(filename)
   load(filename)

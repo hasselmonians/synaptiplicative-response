@@ -18,15 +18,15 @@ function [cost, R] = simulation(x)
 
   %% Perform the three simulations
 
-  R(1)        = simulation_core(x, comps, 1, pulseStart, pulseStop, pulseHeight);
-  R(2)        = simulation_core(x, comps, 2, pulseStart, pulseStop, pulseHeight);
-  R(3)        = simulation_core(x, comps, 3, pulseStart, pulseStop, pulseHeight);
+  R(1)        = simulation_core(x, nSteps, comps, 1, pulseStart, pulseStop, pulseHeight);
+  R(2)        = simulation_core(x, nSteps, comps, 2, pulseStart, pulseStop, pulseHeight);
+  R(3)        = simulation_core(x, nSteps, comps, 3, pulseStart, pulseStop, pulseHeight);
 
   cost        = costFunction(R, epsilon, lambda);
 
 end % function
 
-function r = simulation_core(x, comps, trial, pulseStart, pulseStop, pulseHeight)
+function r = simulation_core(x, nSteps, comps, trial, pulseStart, pulseStop, pulseHeight)
   % reset to steady-state
   x.reset('steadystate');
 
@@ -47,5 +47,5 @@ function r = simulation_core(x, comps, trial, pulseStart, pulseStop, pulseHeight
   % perform the simulation
   V           = x.integrate;
   % compute the EPSP amplitude
-  r           = responseHeight(V);
+  r           = responseHeight(V(:, strcmp(comps, 'Dendrite1')));
 end % function
