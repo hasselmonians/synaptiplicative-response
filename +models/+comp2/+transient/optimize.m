@@ -18,7 +18,7 @@
 
 %% Set up xolotl and xfit
 
-x           = models.comp2.passive.model();
+x           = models.comp2.transient.model();
 p           = xfit('particleswarm');
 p.x         = x;
 p.sim_func  = @models.comp2.transient.simulate;
