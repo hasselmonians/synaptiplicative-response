@@ -28,7 +28,7 @@ function x = model()
   % determine the steady-state
   x.t_end = 10e3;
   x.integrate;
+  x.t_end = 100; % only need a short time to measure EPSP
   x.snapshot('steadystate');
-  x.t_end = 5e3;
 
 end
