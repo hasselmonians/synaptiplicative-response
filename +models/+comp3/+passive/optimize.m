@@ -20,13 +20,13 @@
 
 x           = models.comp2.passive.model();
 p           = xfit('particleswarm');
-
-p.sim_func  = @models.comp2.passive.simulation;
+p.x         = x;
+p.sim_func  = @models.comp2.passive.simulate;
 
 % parameters
 p.parameter_names = [x.find('*gbar'); x.find('*NMDAergic*gmax')];
 p.lb        = [0, 0, 0, 0];
-p.ub        = [1, 1, 1, 1];
+p.ub        = [300, 300, 300, 300]; % uS/mm^2
 
 % set procrustes options
 p.options.MaxTime   = 900;
@@ -35,7 +35,7 @@ p.options.SwarmSize = 24;
 %% Compute the steady-state
 
 x.t_end     = 5e3;
-x.integrate;
+V = x.integrate;
 x.snapshot('steady-state');
 
 %% Initialize outputs
@@ -48,7 +48,7 @@ cost        = NaN(1, nSims);
 
 %% Fit parameters
 
-filename    = ['data-comp2-passive-' corelib.getComputerName '.mat']
+filename    = ['data-comp2-passive-' corelib.getComputerName '.mat'];
 
 if exist(filename)
   load(filename)
