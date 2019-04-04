@@ -1,4 +1,4 @@
-function [cost, R] = simulation(x)
+function [cost, R] = simulation(x, ~, ~)
 
   % preallocate output variables
   cost        = 0;
@@ -41,6 +41,8 @@ function r = simulation_core(x, nSteps, comps, trial, pulseStart, pulseStop, pul
     V_clamp(pulseStart:pulseStop, strcmp(comps, 'Presynaptic1')) = pulseHeight;
     V_clamp(pulseStart:pulseStop, strcmp(comps, 'Presynaptic2')) = pulseHeight;
   end
+
+  keyboard
 
   % clamp the specified compartments
   x.V_clamp   = V_clamp;
