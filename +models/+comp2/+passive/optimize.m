@@ -34,12 +34,6 @@ p.ub        = [300, 300, 300, 300]; % uS/mm^2
 p.options.MaxTime   = 900;
 p.options.SwarmSize = 24;
 
-%% Compute the steady-state
-
-x.t_end     = 5e3;
-V = x.integrate;
-x.snapshot('steady-state');
-
 %% Initialize outputs
 
 nSims       = 100;
