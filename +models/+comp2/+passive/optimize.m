@@ -26,7 +26,7 @@ p.sim_func  = @models.comp2.passive.simulation;
 % parameters
 p.parameter_names = [x.find('*gbar'); x.find('*NMDAergic*gmax')];
 p.lb        = [0, 0, 0, 0];
-p.ub        = [1, 1, 1, 1];
+p.ub        = [300, 300, 300, 300]; % uS/mm^2
 
 % set procrustes options
 p.options.MaxTime   = 900;
