@@ -23,12 +23,12 @@ x.t_end     = 100; % ms, only need to record one EPSP
 
 p           = xfit('particleswarm');
 p.x         = x;
-p.sim_func  = @models.comp2.spiking.simulate;
+p.sim_func  = @models.comp2.passive.simulate;
 
 % parameters
 p.parameter_names = [x.find('*gbar'); x.find('*NMDAergic*gmax')];
-p.lb        = [0, 0, 0, 0, 0, 0];
-p.ub        = [300, 300, 300, 300, 300, 300]; % uS/mm^2
+p.lb        = zeros(1,8);
+p.ub        = 300*ones(1,8); % uS/mm^2
 
 % set procrustes options
 p.options.MaxTime   = 900;
@@ -47,6 +47,7 @@ nEpochs     = 3;
 nParams     = length(p.parameter_names);
 params      = NaN(nParams, nSims);
 cost        = NaN(1, nSims);
+return
 
 %% Fit parameters
 
