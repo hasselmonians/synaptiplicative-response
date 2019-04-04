@@ -1,8 +1,5 @@
 function [cost, R] = simulation(x, ~, ~)
 
-  % reset the object to keep xolotl parameters consistent
-  x.reset('steadystate');
-
   % preallocate output variables
   cost        = 0;
   response    = zeros(3,1);
