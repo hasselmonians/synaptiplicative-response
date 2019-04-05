@@ -47,7 +47,6 @@ nEpochs     = 3;
 nParams     = length(p.parameter_names);
 params      = NaN(nParams, nSims);
 cost        = NaN(1, nSims);
-return
 
 %% Fit parameters
 
