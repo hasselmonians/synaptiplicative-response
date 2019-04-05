@@ -18,20 +18,22 @@ function [cost, R] = simulation(x, ~, ~)
 
   %% Perform the three simulations
 
-  R(1)        = simulation_core(x, nSteps, comps, 1, pulseStart, pulseStop, pulseHeight);
-  R(2)        = simulation_core(x, nSteps, comps, 2, pulseStart, pulseStop, pulseHeight);
-  R(3)        = simulation_core(x, nSteps, comps, 3, pulseStart, pulseStop, pulseHeight);
+  R(1)        = simulation_core(x, comps, 1, pulseStart, pulseStop, pulseHeight);
+  R(2)        = simulation_core(x, comps, 2, pulseStart, pulseStop, pulseHeight);
+  R(3)        = simulation_core(x, comps, 3, pulseStart, pulseStop, pulseHeight);
 
   cost        = costFunction(R, epsilon, lambda);
 
 end % function
 
-function r = simulation_core(x, nSteps, comps, trial, pulseStart, pulseStop, pulseHeight)
+function r = simulation_core(x, comps, trial, pulseStart, pulseStop, pulseHeight)
   % reset to steady-state
   x.reset('steady-state');
+  x.t_end     = 100;
 
   % set the voltage clamp in the correct presynaptic compartments
-  V_clamp     = NaN(nSteps, length(comps));
+  V_clamp     = NaN(x.t_end / x.dt, length(comps));
+
   switch trial
   case 1
     V_clamp(pulseStart:pulseStop, strcmp(comps, 'Presynaptic1')) = pulseHeight;
