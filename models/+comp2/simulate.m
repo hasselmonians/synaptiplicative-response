@@ -10,7 +10,7 @@ function [cost, costParts, R] = simulate(x, ~, ~)
   lambda      = [1, 0, 0];              % weighting of multiplicative, additive, and supralinear costs
 
   % set up presynaptic waveform pulse
-  pulseWidth  = round(3 / x.dt);
+  pulseWidth  = round(30 / x.dt);
   pulseHeight = 30;
   pulseStart  = round(2 / x.dt);
   pulseStop   = pulseStart + pulseWidth;
