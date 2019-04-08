@@ -31,6 +31,7 @@ function x = model()
 
   x.t_end = 5e3;
   V = x.integrate;
+  x.t_end = 100;
   x.snapshot('steady-state');
 
 end
