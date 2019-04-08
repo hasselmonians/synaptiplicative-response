@@ -16,7 +16,7 @@ function [cost, costParts] = costFunction(R, epsilon, lambda, bounds)
     end
 
     if isempty(epsilon)
-        epsilon = 100; % microvolts
+        epsilon = 0.01; % mV
     end
 
     if isempty(lambda)
@@ -26,6 +26,10 @@ function [cost, costParts] = costFunction(R, epsilon, lambda, bounds)
     % initialize the cost
     costParts = zeros(1,4); % this will be summed at the end for the total cost
     cost      = 0;
+
+    % convert all values in mV to microvolts to prevent fractions
+    R = 1e3 * R;
+    epsilon = 1e3 * epsilon;
 
     % useful variables
     multiplicative  = R(3) - R(1)*R(2);
@@ -41,7 +45,9 @@ function [cost, costParts] = costFunction(R, epsilon, lambda, bounds)
     if additive < 1e-9;
         costParts(3) = 1e9;
     else
-        costParts(3) = lambda(2) * (1/additive)^2;
+        if lambda(2)
+            costParts(3) = lambda(2) * (1/additive)^2;
+        end
     end
 
     % cost due to failure for response to live in a supralinear range

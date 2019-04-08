@@ -5,9 +5,8 @@ function [cost, costParts, R] = simulate(x, ~, ~)
   response    = zeros(3,1);
 
   % useful variables
-  nSteps      = x.t_end / x.dt;         % number of time steps
   comps       = x.find('compartment');  % list of all compartments
-  epsilon     = 100;                    % microvolts, minimum allowed response
+  epsilon     = 0.01;                   % mV, minimum allowed response
   lambda      = [1, 0, 0];              % weighting of multiplicative, additive, and supralinear costs
 
   % set up presynaptic waveform pulse
