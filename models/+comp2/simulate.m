@@ -1,4 +1,4 @@
-function [cost, R] = simulation(x, ~, ~)
+function [cost, costParts, R] = simulation(x, ~, ~)
 
   % preallocate output variables
   cost        = 0;
@@ -22,7 +22,7 @@ function [cost, R] = simulation(x, ~, ~)
   R(2)        = simulation_core(x, comps, 2, pulseStart, pulseStop, pulseHeight);
   R(3)        = simulation_core(x, comps, 3, pulseStart, pulseStop, pulseHeight);
 
-  cost        = costFunction(R, epsilon, lambda);
+  [cost, costParts] = costFunction(R, epsilon, lambda);
 
 end % function
 
