@@ -24,7 +24,7 @@ function [cost, costParts] = costFunction(R, epsilon, lambda, bounds)
     end
 
     % initialize the cost
-    costParts = zeros(4, 1); % this will be summed at the end for the total cost
+    costParts = zeros(1,4); % this will be summed at the end for the total cost
     cost      = 0;
 
     % useful variables
