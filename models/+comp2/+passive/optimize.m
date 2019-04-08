@@ -39,7 +39,7 @@ p.options.SwarmSize = 24;
 nSims       = 100;
 nEpochs     = 3;
 nParams     = length(p.parameter_names);
-params      = NaN(nParams, nSims);
+params      = NaN(nSims, nParams);
 cost        = NaN(nSims, 1);
 costParts   = NaN(nSims, 4);
 responses   = NaN(nSims, 3);
@@ -68,7 +68,7 @@ for ii = start_idx:nSims
     end
 
     % save
-    params(:,ii)  = p.seed;
+    params(ii, :)  = p.seed;
     [cost(ii), costParts(ii, :), response(ii, :)] = p.sim_func(x);
     save(filename, 'cost', 'params', 'costParts', 'responses');
     disp(['saved simulation ' num2str(ii)])
