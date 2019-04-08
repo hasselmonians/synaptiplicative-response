@@ -21,11 +21,11 @@ function x = model()
   % add only a leak current
   x.Presynaptic1.add('Leak', 'gbar', 0.1, 'E', -50);
   x.Presynaptic2.add('Leak', 'gbar', 0.1, 'E', -50);
-  
+
   %% Connect presynaptic compartments to postsynaptic compartments
 
-  x.connect('Presynaptic1', 'Dendrite1', 'borgers/NMDAergic', 'gmax', 0, 'Mg', 2, 'tau_d', 2, 'tau_r', 10);
-  x.connect('Presynaptic2', 'Dendrite2', 'borgers/NMDAergic', 'gmax', 0, 'Mg', 2, 'tau_d', 2, 'tau_r', 10);
+  x.connect('Presynaptic1', 'Dendrite1', 'borgers/NMDAergic', 'gmax', 0, 'Mg', 1, 'tau_d', 30, 'tau_r', 2, 'E', 0);
+  x.connect('Presynaptic2', 'Dendrite2', 'borgers/NMDAergic', 'gmax', 0, 'Mg', 1, 'tau_d', 30, 'tau_r', 2, 'E', 0);
 
   %% Compute the steady-state
 
