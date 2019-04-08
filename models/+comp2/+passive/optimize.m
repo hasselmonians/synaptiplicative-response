@@ -60,7 +60,7 @@ for ii = start_idx:nSims
   try
 
     % set seed
-    p.seed = p.ub .* rand(size(p.ub));
+    p.seed = p.ub - 0.5 * p.ub .* rand(size(p.ub)); % start with high parameters > 0.5 * p.ub
 
     % run xfit
     for qq = 1:nEpochs
