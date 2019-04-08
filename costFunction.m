@@ -1,4 +1,4 @@
-function cost = costFunction(R, epsilon, lambda, bounds)
+function [cost, costParts, R] = costFunction(R, epsilon, lambda, bounds)
     % Arguments:
     %   R: 3x1 vector of responses (first, second, both)
     %   epsilon: minimal value a response needs to be

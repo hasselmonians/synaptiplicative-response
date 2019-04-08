@@ -46,7 +46,9 @@ nSims       = 100;
 nEpochs     = 3;
 nParams     = length(p.parameter_names);
 params      = NaN(nParams, nSims);
-cost        = NaN(1, nSims);
+cost        = NaN(nSims, 1);
+costParts   = NaN(nSims, 4);
+responses   = NaN(nSims, 3);
 
 %% Fit parameters
 
@@ -73,8 +75,8 @@ for ii = start_idx:nSims
 
     % save
     params(:,ii)  = p.seed;
-    cost(ii)      = p.sim_func(x);
-    save(filename, 'cost', 'params');
+    [cost(ii), costParts(ii, :), response(ii, :)] = p.sim_func(x);
+    save(filename, 'cost', 'params', 'costParts', 'responses');
     disp(['saved simulation ' num2str(ii)])
 
   catch
