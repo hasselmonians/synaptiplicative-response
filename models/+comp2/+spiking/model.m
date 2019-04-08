@@ -7,7 +7,7 @@ function x = model()
 
   x.add('compartment', 'Dendrite', 'Cm', 30, 'radius', 4e-3, 'len', N * 110e-3);
 
-  % add only a leak current
+  % add a leak current and spiking currents
   x.Dendrite.add('Leak', 'gbar', 0.1, 'E', -50);
   x.Dendrite.add('soplata/thalamocortical/NaV', 'gbar', 0.1, 'E', 100);
   x.Dendrite.add('soplata/thalamocortical/Kd', 'gbar', 0.1, 'E', -100);
@@ -19,6 +19,10 @@ function x = model()
 
   x.add('compartment', 'Presynaptic1', 'Cm', 30, 'radius', 4e-3, 'len', 110e-3);
   x.add('compartment', 'Presynaptic2', 'Cm', 30, 'radius', 4e-3, 'len', 110e-3);
+
+  % add only a leak current
+  x.Presynaptic1.add('Leak', 'gbar', 0.1, 'E', -50);
+  x.Presynaptic2.add('Leak', 'gbar', 0.1, 'E', -50);
 
   %% Connect presynaptic compartments to postsynaptic compartments
 
