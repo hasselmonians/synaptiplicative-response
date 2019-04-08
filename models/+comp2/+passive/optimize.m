@@ -47,7 +47,7 @@ responses   = NaN(nSims, 3);
 %% Fit parameters
 
 filename    = ['data-comp2-passive-' corelib.getComputerName '.mat'];
-return
+
 if exist(filename)
   load(filename)
   start_idx = find(isnan(cost),1,'first')
