@@ -27,8 +27,8 @@ p.sim_func  = @comp2.simulate;
 
 % parameters
 p.parameter_names = [x.find('*gbar'); x.find('*NMDAergic*gmax')];
-p.lb        = zeros(1,8);
-p.ub        = 300*ones(1,8); % uS/mm^2
+p.lb        = zeros(1, length(p.parameter_names));
+p.ub        = 300 * ones(1, length(p.parameter_names)); % uS/mm^2
 
 % set procrustes options
 p.options.MaxTime   = 900;

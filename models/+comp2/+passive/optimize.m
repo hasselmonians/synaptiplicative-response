@@ -27,8 +27,8 @@ p.sim_func  = @comp2.simulate;
 
 % parameters
 p.parameter_names = [x.find('*gbar'); x.find('*NMDAergic*gmax')];
-p.lb        = [0, 0, 0, 0];
-p.ub        = [300, 300, 300, 300]; % uS/mm^2
+p.lb        = zeros(1, length(p.parameter_names));
+p.ub        = 300 * ones(1, length(p.parameter_names)); % uS/mm^2
 
 % set procrustes options
 p.options.MaxTime   = 900;
@@ -47,7 +47,7 @@ responses   = NaN(nSims, 3);
 %% Fit parameters
 
 filename    = ['data-comp2-passive-' corelib.getComputerName '.mat'];
-
+return
 if exist(filename)
   load(filename)
   start_idx = find(isnan(cost),1,'first')
