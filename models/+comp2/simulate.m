@@ -11,7 +11,7 @@ function [cost, costParts, R] = simulate(x, ~, ~)
 
   % set up presynaptic waveform pulse
   pulseWidth  = round(2 / x.dt);
-  pulseHeight = 30;
+  pulseHeight = 50;
   pulseStart  = round(2 / x.dt);
   pulseStop   = pulseStart + pulseWidth;
 
