@@ -1,4 +1,4 @@
-function [cost, costParts, R] = simulation(x, ~, ~)
+function [cost, costParts, R] = simulate(x, ~, ~)
 
   % preallocate output variables
   cost        = 0;
