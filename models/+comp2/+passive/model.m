@@ -27,11 +27,4 @@ function x = model()
   x.connect('Presynaptic1', 'Dendrite1', 'borgers/NMDAergic', 'gmax', 0, 'Mg', 1, 'tau_d', 30, 'tau_r', 2, 'E', 0);
   x.connect('Presynaptic2', 'Dendrite2', 'borgers/NMDAergic', 'gmax', 0, 'Mg', 1, 'tau_d', 30, 'tau_r', 2, 'E', 0);
 
-  %% Compute the steady-state
-
-  x.t_end = 5e3;
-  V = x.integrate;
-  x.t_end = 100;
-  x.snapshot('steady-state');
-
 end
