@@ -52,7 +52,7 @@ responses   = NaN(nSims, 3);
 
 %% Fit parameters
 
-filename    = ['data-comp2-passive-' corelib.getComputerName '.mat'];
+filename    = ['data-comp2-spiking-' corelib.getComputerName '.mat'];
 
 if exist(filename)
   load(filename)
