@@ -1,5 +1,14 @@
 function [cost, costParts, R] = simulate(x, ~, ~)
 
+  %% Preamble
+
+  % compute the steady-state
+  % this has to be done here because the parameters change
+  x.t_end = 5e3;
+  V = x.integrate;
+  x.t_end = 100;
+  x.snapshot('steady-state');
+
   % preallocate output variables
   cost        = 0;
   response    = zeros(3,1);
@@ -35,12 +44,15 @@ function r = simulation_core(x, comps, trial, pulseStart, pulseStop, pulseHeight
 
   switch trial
   case 1
+    % zap the first compartment
     V_clamp(:, strcmp(comps, 'Presynaptic1')) = -60;
     V_clamp(pulseStart:pulseStop, strcmp(comps, 'Presynaptic1')) = pulseHeight;
   case 2
+    % zap the second compartment
     V_clamp(:, strcmp(comps, 'Presynaptic2')) = -60;
     V_clamp(pulseStart:pulseStop, strcmp(comps, 'Presynaptic2')) = pulseHeight;
   case 3
+    % zap both compartments
     V_clamp(:, strcmp(comps, 'Presynaptic1')) = -60;
     V_clamp(pulseStart:pulseStop, strcmp(comps, 'Presynaptic1')) = pulseHeight;
     V_clamp(:, strcmp(comps, 'Presynaptic2')) = -60;
@@ -52,5 +64,13 @@ function r = simulation_core(x, comps, trial, pulseStart, pulseStop, pulseHeight
   % perform the simulation
   V           = x.integrate;
   % compute the EPSP amplitude
-  r           = responseHeight(V(:, strcmp(comps, 'Dendrite1')));
+  switch trial
+  case 1
+    r           = responseHeight(V(:, strcmp(comps, 'Dendrite1')));
+  case 2
+    r           = responseHeight(V(:, strcmp(comps, 'Dendrite2')));
+  case 3
+    r           = responseHeight(V(:, strcmp(comps, 'Dendrite1')));
+  end
+
 end % function
