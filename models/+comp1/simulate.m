@@ -5,6 +5,7 @@ function [cost, costParts, R] = simulate(x, ~, ~)
   % compute the steady-state
   % this has to be done here because the parameters change
   x.t_end = 5e3;
+  x.V_clamp = [NaN, NaN, NaN];
   V = x.integrate;
   x.t_end = 100;
   x.snapshot('steady-state');
