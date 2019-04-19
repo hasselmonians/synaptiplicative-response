@@ -42,7 +42,7 @@ function [cost, costParts] = costFunction(R, epsilon, lambda, bounds)
     costParts(2) = lambda(1) * multiplicative^2;
 
     % cost due to closeness to additive response
-    if additive < 1e-9;
+    if additive < 1e-4;
         costParts(3) = 1e9;
     else
         if lambda(2)
