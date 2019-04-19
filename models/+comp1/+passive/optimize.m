@@ -26,7 +26,8 @@ p.x         = x;
 p.sim_func  = @comp1.simulate;
 
 % parameters
-p.parameter_names = [x.find('*gbar'); x.find('*NMDAergic*gmax')];
+param_names = [x.find('*gbar'); x.find('*NMDAergic*gmax')];
+p.parameter_names = param_names;
 p.lb        = zeros(1, length(p.parameter_names));
 p.ub        = 1000 * ones(1, length(p.parameter_names)); % uS/mm^2
 
@@ -69,8 +70,8 @@ for ii = start_idx:nSims
 
     % save
     params(ii, :)  = p.seed;
-    [cost(ii), costParts(ii, :), response(ii, :)] = p.sim_func(x);
-    save(filename, 'cost', 'params', 'costParts', 'responses');
+    [cost(ii), costParts(ii, :), responses(ii, :)] = p.sim_func(x);
+    save(filename, 'cost', 'params', 'costParts', 'responses', 'param_names');
     disp(['saved simulation ' num2str(ii)])
 
   catch
