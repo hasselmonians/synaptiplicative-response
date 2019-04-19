@@ -17,7 +17,7 @@ function [cost, costParts, R] = simulate(x, ~, ~)
   % useful variables
   comps       = x.find('compartment');  % list of all compartments
   epsilon     = 0.01;                   % mV, minimum allowed response
-  lambda      = [1, 0, 0];              % weighting of multiplicative, additive, and supralinear costs
+  lambda      = [0, 0, 0];              % weighting of multiplicative, additive, and supralinear costs
 
   % set up presynaptic waveform pulse
   pulseWidth  = round(2 / x.dt);
