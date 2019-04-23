@@ -22,7 +22,7 @@ function [cost, costParts] = costFunction(R, epsilon, lambda, bounds)
     if isempty(lambda)
         lambda = [1, 1, 1];
     end
-
+    keyboard
     % initialize the cost
     costParts = zeros(1,4); % this will be summed at the end for the total cost
     cost      = 0;
@@ -42,7 +42,7 @@ function [cost, costParts] = costFunction(R, epsilon, lambda, bounds)
     costParts(2) = lambda(1) * multiplicative^2;
 
     % cost due to closeness to additive response
-    if additive < 1e-4;
+    if abs(additive) < 1e-4;
         costParts(3) = 1e9;
     else
         if lambda(2)
