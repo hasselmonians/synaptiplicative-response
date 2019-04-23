@@ -27,11 +27,9 @@ function manip_func(x)
 		ylabel(manip_plot.case3, 'pulse #1 & #2')
 		xlabel(manip_plot.Vclamp, 'time (ms)')
 		ylabel(manip_plot.Vclamp, 'clamped voltage (mV)')
-		linkaxes([manip_plot.case1, manip_plot.case2, manip_plot.case3], 'y')
 
 		% add the master plot handle to xolotl for safekeeping
 		x.handles.manip_plot = manip_plot;
-
 
 	end
 
@@ -89,6 +87,15 @@ function manip_func(x)
 		V(:, ii) = Vtemp(:, strcmp(comps, 'Dendrite'));
 
 	end
+
+	% set up the y-limits
+
+	minlim = min(V(:)) - 10;
+	maxlim = max(V(:)) + 10;
+
+	ylim(manip_plot.case1, [minlim maxlim]);
+	ylim(manip_plot.case2, [minlim maxlim]);
+	ylim(manip_plot.case3, [minlim maxlim]);
 
 	% add the data to the plots
 	manip_plot.plots.V1.XData = time;
