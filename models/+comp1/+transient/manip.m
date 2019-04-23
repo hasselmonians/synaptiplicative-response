@@ -4,4 +4,4 @@
 x = comp1.transient.model();
 x.manipulate_plot_func = {@comp1.manip_func};
 
-x.manipulate([x.find('*gbar'); x.find('*NMDAergic*gmax')])
+x.manipulate([x.find('Dendrite*gbar'); x.find('Dendrite*NMDAergic*gmax')])
