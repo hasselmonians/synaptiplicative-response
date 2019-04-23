@@ -22,7 +22,7 @@ function [cost, costParts] = costFunction(R, epsilon, lambda, bounds)
     if isempty(lambda)
         lambda = [1, 1, 1];
     end
-    keyboard
+
     % initialize the cost
     costParts = zeros(1,4); % this will be summed at the end for the total cost
     cost      = 0;
