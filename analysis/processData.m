@@ -7,6 +7,8 @@ function [dataTable, param_names] = processData(filepaths)
   %
   % the data are expected to have cost, costParts, params, and responses as fields
 
+  %% Gather the data into a table
+
   dirs = dir(filepaths);
   assert(numel(dirs) > 0, ['could not find any data files for filepath: ' filepaths])
 
@@ -27,4 +29,10 @@ function [dataTable, param_names] = processData(filepaths)
       dataTable = [dataTable; dataTable2];
     end
   end
+
+  %% Eliminate "failing" parameter sets
+
+  % failing is defined as having a cost >= 1e4
+  dataTable = dataTable(dataTable.cost < 1e4, :);
+
 end % function
