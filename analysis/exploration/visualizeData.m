@@ -1,3 +1,6 @@
+pdflib.header;
+tic
+
 %% Introduction
 % Anecdotal scientific evidence suggests that the combined action of multiple synapses
 % upon a single region of membrane could interact in a strongly nonlinear (multiplicative)
@@ -34,3 +37,11 @@
 % In order to determine the parameters of the model which satisfy this condition,
 % we used particle swarm optimization over the maximal conductances of the model.
 % The model was implemented in |xolotl|.
+
+%% Version Info
+pdflib.footer;
+time = toc;
+
+%%
+% This document was built in:
+disp(strcat(strlib.oval(time,3),' seconds.'))
