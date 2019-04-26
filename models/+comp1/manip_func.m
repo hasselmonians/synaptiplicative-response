@@ -22,9 +22,9 @@ function manip_func(x)
 		x.handles.puppeteer_object.attachFigure(manip_plot.main_fig)
 
 		% labels
-		ylabel(manip_plot.case1, 'pulse #1')
-		ylabel(manip_plot.case2, 'pulse #2')
-		ylabel(manip_plot.case3, 'pulse #1 & #2')
+		ylabel(manip_plot.case1, 'R_1 (mV)')
+		ylabel(manip_plot.case2, 'R_2 (mV)')
+		ylabel(manip_plot.case3, 'R_{1,2} (mV)')
 		xlabel(manip_plot.Vclamp, 'time (ms)')
 		ylabel(manip_plot.Vclamp, 'clamped voltage (mV)')
 
@@ -41,11 +41,7 @@ function manip_func(x)
 
 	% compute the steady-state
 	% this has to be done here because the parameters change
-	x.t_end = 5e3;
-	x.V_clamp = [NaN, NaN, NaN];
-	V = x.integrate;
-	x.t_end = 100;
-	x.snapshot('steady-state');
+	x = setSteadyState(x);
 
 	% set up presynaptic waveform pulse
 	pulseWidth  = round(2 / x.dt);

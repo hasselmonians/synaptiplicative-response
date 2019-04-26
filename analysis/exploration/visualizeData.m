@@ -38,6 +38,41 @@ tic
 % we used particle swarm optimization over the maximal conductances of the model.
 % The model was implemented in |xolotl|.
 
+%% 1-compartment case
+% In the 1-compartment case, a single compartment representing a cylindrical patch of membrane
+% is postsynaptic to two disconnected presynaptic compartments by NMDAergic synapses.
+% In the first experiment, only passive leak channels were included, aside from the synapses.
+% 100 simulations were performed.
+
+% load the data into a data table
+[dataTable, param_names] = processData('data-comp1-passive*.mat');
+
+disp(['Models passing: ' num2str(height(dataTable)) '/100'])
+disp('Parameter Names:')
+disp(param_names)
+summary(dataTable)
+
+% plot responses in a line plot
+figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1600]);
+plot(dataTable.responses', '-ko', 'MarkerFaceColor', 'k')
+xticks([1 2 3])
+xticklabels({'R_1', 'R_2', 'R_{1,2}'})
+xlabel('response conditions')
+ylabel('response magnitude (mV)')
+xlim([0 4])
+ylim([0.9*min(dataTable.responses(:)), 1.1*max(dataTable.responses(:))])
+title('comp1-passive responses')
+figlib.pretty()
+
+pdflib.snap
+% delete(gcf)
+
+% find exemplar
+[~, idx] = min(dataTable.cost);
+x = comp1.passive.model();
+x.set(param_names, dataTable.params(idx, :));
+
+
 %% Version Info
 pdflib.footer;
 time = toc;
