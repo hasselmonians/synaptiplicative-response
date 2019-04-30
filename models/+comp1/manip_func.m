@@ -45,7 +45,7 @@ function manip_func(x)
 
 	% set up presynaptic waveform pulse
 	pulseWidth  = round(2 / x.dt);
-	pulseHeight = 50;
+	pulseHeight = 60;
 	pulseStart  = round(2 / x.dt);
 	pulseStop   = pulseStart + pulseWidth;
 
