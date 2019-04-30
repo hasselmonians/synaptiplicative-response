@@ -1,3 +1,5 @@
+function [t, I, ax] = plotSynapse(ax)
+
 %% Plot Synapse
 % Visualize the synaptic current of an NMDAergic synapse model given varying
 % presynaptic pulses and a constant post-synaptic membrane potential
@@ -52,7 +54,33 @@ end
 
 %% Plot the results
 
-figure;
-plot(x.dt * (1:length(I)), I);
-xlabel('time (ms)')
-ylabel('current density')
+t = x.dt * (1:length(I));
+C = colormaps.linspecer(size(I, 2));
+
+if nargin == 0
+  figure; hold on;
+  for ii = 1:size(I, 2)
+    plot(t, I(:, ii), 'Color', C(ii, :));
+  end
+  xlabel('time (ms)')
+  ylabel('current density')
+  c = colorbar('Location', 'EastOutside');
+  c.Label.String = 'V_{post} (mV)';
+  c.TickLength = 1/length(V_hold);
+  caxis([min(V_hold) max(V_hold)]);
+  colormap(colormaps.linspecer)
+  figlib.pretty();
+else
+  hold(ax, 'on');
+  for ii = 1:size(I, 2)
+    plot(t, I(:, ii), 'Color', C(ii, :));
+  end
+  xlabel(ax, 'time (ms)')
+  ylabel(ax, 'current density')
+  c = colorbar(ax, 'Location', 'EastOutside');
+  c.Label.String = 'V_{post} (mV)';
+  c.TickLength = 1/length(V_hold);
+  caxis([min(V_hold) max(V_hold)]);
+  colormap(colormaps.linspecer)
+  figlib.pretty();
+end
