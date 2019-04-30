@@ -38,6 +38,28 @@ tic
 % we used particle swarm optimization over the maximal conductances of the model.
 % The model was implemented in |xolotl|.
 
+%% NMDAergic synapses
+% The NMDA synapse model used is based on the Jahr-Stevens model
+% and can be found in C. Borgers 2017 Ch. 20.
+% The conductance depends on both the presynaptic and postsynaptic membrane potentials
+% as well as time.
+% Magnesium block kinetics are assumed to be instantaneous,
+% so that only one gating variable is needed.
+%
+% $$ I_{syn}(V_{pre}, V_{post}, t) = \bar{g} s(V_{pre}, t) u(V_{post}) (V_{post} - E_{syn}) $$
+%
+% The following figure depicts the postsynaptc current response parametrized
+% by fixed postsynaptic membrane potential.
+% The presynaptic compartment is subjected to a 2-ms pulse at 60 mV at $t = 0$ ms.
+
+figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1600]);
+ax = subplot(1,1,1);
+title(ax, 'NMDA current w.r.t. postsynaptic potential')
+plotSynapse(ax);
+
+pdflib.snap
+delete(gcf)
+
 %% 1-compartment case
 % In the 1-compartment case, a single compartment representing a cylindrical patch of membrane
 % is postsynaptic to two disconnected presynaptic compartments by NMDAergic synapses.
@@ -65,13 +87,45 @@ title('comp1-passive responses')
 figlib.pretty()
 
 pdflib.snap
-% delete(gcf)
+delete(gcf)
 
 % find exemplar
 [~, idx] = min(dataTable.cost);
 x = comp1.passive.model();
+comps = x.find('compartment');
 x.set(param_names, dataTable.params(idx, :));
 
+% compute the membrane potential for the three conditions
+[~, ~, ~, V] = comp1.simulate(x);
+
+% set up presynaptic waveform pulse
+time = (1:length(V))*x.dt;
+pulseWidth  = round(2 / x.dt);
+pulseHeight = 60;
+pulseStart  = round(2 / x.dt);
+pulseStop   = pulseStart + pulseWidth;
+waveform = -60 * ones(length(time), 1);
+waveform(pulseStart:pulseStop, 1) = pulseHeight;
+
+figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1600]);
+ylabels = {'R_1 (mV)', 'R_2 (mV)', 'R_{1,2} (mV)'};
+minlim = min(V(:)) - 10;
+maxlim = max(V(:)) + 10;
+for ii = 4:-1:1
+  ax(ii) = subplot(4, 1, ii);
+end
+for ii = 1:3
+  plot(ax(ii), time, V(:,ii), 'k');
+  ylabel(ax(ii), ylabels{ii})
+  ylim(ax(ii), [minlim maxlim])
+end
+plot(ax(4), time, waveform, 'k');
+xlabel(ax(4), 'time (ms)')
+ylabel(ax(4), 'clamp (mV)')
+
+figlib.pretty()
+pdflib.snap
+delete(gcf)
 
 %% Version Info
 pdflib.footer;
