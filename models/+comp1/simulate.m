@@ -1,4 +1,4 @@
-function [cost, costParts, R] = simulate(x, ~, ~)
+function [cost, costParts, R, V] = simulate(x, ~, ~)
 
   %% Preamble
 
@@ -9,6 +9,7 @@ function [cost, costParts, R] = simulate(x, ~, ~)
   % preallocate output variables
   cost        = 0;
   response    = zeros(3,1);
+  V           = zeros(x.t_end / x.dt, 3);
 
   % useful variables
   comps       = x.find('compartment');  % list of all compartments
@@ -23,9 +24,9 @@ function [cost, costParts, R] = simulate(x, ~, ~)
 
   %% Perform the three simulations
 
-  R(1)        = comp1.simulation_core(x, comps, 1, pulseStart, pulseStop, pulseHeight);
-  R(2)        = comp1.simulation_core(x, comps, 2, pulseStart, pulseStop, pulseHeight);
-  R(3)        = comp1.simulation_core(x, comps, 3, pulseStart, pulseStop, pulseHeight);
+  [R(1), V(:,1)]   = comp1.simulate_core(x, comps, 1, pulseStart, pulseStop, pulseHeight);
+  [R(2), V(:,2)]   = comp1.simulate_core(x, comps, 2, pulseStart, pulseStop, pulseHeight);
+  [R(3), V(:,3)]   = comp1.simulate_core(x, comps, 3, pulseStart, pulseStop, pulseHeight);
 
   [cost, costParts] = costFunction(R, epsilon, lambda);
 

@@ -31,10 +31,13 @@ function [r, V] = simulation_core(x, comps, trial, pulseStart, pulseStop, pulseH
   switch trial
   case 1
     r           = responseHeight(V(:, strcmp(comps, 'Dendrite')));
+    V           = V(:, strcmp(comps, 'Dendrite'));
   case 2
     r           = responseHeight(V(:, strcmp(comps, 'Dendrite')));
+    V           = V(:, strcmp(comps, 'Dendrite'));
   case 3
     r           = responseHeight(V(:, strcmp(comps, 'Dendrite')));
+    V           = V(:, strcmp(comps, 'Dendrite'));
   end
 
 end % function
