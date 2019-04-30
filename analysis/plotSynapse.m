@@ -54,7 +54,7 @@ end
 
 %% Plot the results
 
-t = x.dt * (1:length(I));
+t = x.dt * ((1:length(I)) - pulseStart);
 C = colormaps.linspecer(size(I, 2));
 
 if nargin == 0
