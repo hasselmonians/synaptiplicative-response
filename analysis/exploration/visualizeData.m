@@ -99,6 +99,8 @@ x.set(param_names, dataTable.params(idx, :));
 % compute the membrane potential for the three conditions
 [~, ~, ~, V] = comp1.simulate(x);
 
+return
+
 % set up presynaptic waveform pulse
 time = (1:length(V))*x.dt;
 pulseWidth  = round(2 / x.dt);
@@ -110,8 +112,8 @@ waveform(pulseStart:pulseStop, 1) = pulseHeight;
 
 figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1600]);
 ylabels = {'R_1 (mV)', 'R_2 (mV)', 'R_{1,2} (mV)'};
-minlim = min(V(:)) - 10;
-maxlim = max(V(:)) + 10;
+minlim = min(V(:)) - 0.1*abs(min(V(:)));
+maxlim = max(V(:)) + 0.1*abs(max(V(:)));
 for ii = 4:-1:1
   ax(ii) = subplot(4, 1, ii);
 end
