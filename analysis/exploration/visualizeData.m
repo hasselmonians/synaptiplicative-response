@@ -67,7 +67,7 @@ delete(gcf)
 % 100 simulations were performed.
 
 % load the data into a data table
-[dataTable, param_names] = processData('data-comp1-passive*.mat');
+[dataTable, param_names] = processData('~/code/synaptiplicative-response/**/data-comp1-passive*.mat');
 
 disp(['Models passing: ' num2str(height(dataTable)) '/100'])
 disp('Parameter Names:')
