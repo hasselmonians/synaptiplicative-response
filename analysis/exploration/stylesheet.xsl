@@ -22,7 +22,7 @@ $Revision: 1.1.6.7 $  $Date: 2008/02/29 12:45:30 $
 % To make changes, update the M-file and republish this document.
 
 \documentclass{article}
-\usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{color}
 
