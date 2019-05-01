@@ -22,9 +22,11 @@ $Revision: 1.1.6.7 $  $Date: 2008/02/29 12:45:30 $
 % To make changes, update the M-file and republish this document.
 
 \documentclass{article}
-\usepackage[utf8]{inputenc}
+\usepackage[utf8x]{inputenc}
 \usepackage{graphicx}
 \usepackage{color}
+
+\DeclareUnicodeCharacter{0215}{\ensuremath{\times}}
 
 \sloppy
 \definecolor{lightgray}{gray}{0.5}
