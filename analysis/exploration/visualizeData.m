@@ -48,7 +48,7 @@ tic
 %
 % $$ I_{syn}(V_{pre}, V_{post}, t) = \bar{g} s(V_{pre}, t) u(V_{post}) (V_{post} - E_{syn}) $$
 %
-% The following figure depicts the postsynaptc current response parametrized
+% The following figure depicts the postsynaptic current response parametrized
 % by fixed postsynaptic membrane potential.
 % The presynaptic compartment is subjected to a 2-ms pulse at 60 mV at $t = 0$ ms.
 
