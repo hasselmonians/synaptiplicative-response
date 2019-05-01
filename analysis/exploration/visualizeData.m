@@ -85,8 +85,8 @@ ylabel('response magnitude (mV)')
 xlim([0 4])
 ylim([0.9*min(dataTable.responses(:)), 1.1*max(dataTable.responses(:))])
 title('comp1-passive responses')
-figlib.pretty()
-figlib.tight()
+figlib.pretty();
+figlib.tight();
 
 pdflib.snap
 delete(gcf)
@@ -127,8 +127,8 @@ plot(ax(4), time, waveform, 'k');
 xlabel(ax(4), 'time (ms)')
 ylabel(ax(4), 'clamp (mV)')
 
-figlib.pretty()
-figlib.tight()
+figlib.pretty();
+figlib.tight();
 
 pdflib.snap
 delete(gcf)
