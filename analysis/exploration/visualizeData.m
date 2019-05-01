@@ -56,6 +56,7 @@ figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1
 ax = subplot(1,1,1);
 title(ax, 'NMDA current w.r.t. postsynaptic potential')
 plotSynapse(ax);
+figlib.tight();
 
 pdflib.snap
 delete(gcf)
