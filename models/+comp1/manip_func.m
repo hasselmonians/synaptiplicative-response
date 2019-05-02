@@ -88,10 +88,14 @@ function manip_func(x)
 
 	minlim = min(V(:)) - 10;
 	maxlim = max(V(:)) + 10;
+	maxtime = max(time);
 
 	ylim(manip_plot.case1, [minlim maxlim]);
 	ylim(manip_plot.case2, [minlim maxlim]);
 	ylim(manip_plot.case3, [minlim maxlim]);
+	xlim(manip_plot.case1, [0 maxtime]);
+	xlim(manip_plot.case2, [0 maxtime]);
+	xlim(manip_plot.case3, [0 maxtime]);
 
 	% add the data to the plots
 	manip_plot.plots.V1.XData = time;
