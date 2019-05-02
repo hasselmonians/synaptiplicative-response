@@ -28,7 +28,7 @@ p.sim_func  = @comp1.simulate;
 % parameters
 param_names = [x.find('Dendrite*gbar'); x.find('Dendrite*NMDAergic*gmax')];
 p.parameter_names = param_names;
-return
+
 p.lb        = zeros(1, length(p.parameter_names));
 p.ub        = [100 30 100 30 30]; % uS/mm^2
 
