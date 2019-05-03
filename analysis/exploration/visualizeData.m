@@ -100,8 +100,6 @@ x.set(param_names, dataTable.params(idx, :));
 % compute the membrane potential for the three conditions
 [~, ~, ~, V] = comp1.simulate(x);
 
-return
-
 % set up presynaptic waveform pulse
 time = (1:length(V))*x.dt;
 pulseWidth  = round(2 / x.dt);
