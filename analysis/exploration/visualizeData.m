@@ -111,19 +111,20 @@ waveform(pulseStart:pulseStop, 1) = pulseHeight;
 
 figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1600]);
 ylabels = {'R_1 (mV)', 'R_2 (mV)', 'R_{1,2} (mV)'};
-minlim = min(V(:)) - 0.1*abs(min(V(:)));
-maxlim = max(V(:)) + 0.1*abs(max(V(:)));
+% minlim = min(V(:)) - 0.01*abs(min(V(:)));
+% maxlim = max(V(:)) + 0.01*abs(max(V(:)));
 for ii = 4:-1:1
   ax(ii) = subplot(4, 1, ii);
 end
 for ii = 1:3
   plot(ax(ii), time, V(:,ii), 'k');
   ylabel(ax(ii), ylabels{ii})
-  ylim(ax(ii), [minlim maxlim])
+  % ylim(ax(ii), [minlim maxlim])
 end
 plot(ax(4), time, waveform, 'k');
 xlabel(ax(4), 'time (ms)')
 ylabel(ax(4), 'clamp (mV)')
+linkaxes(ax(1:3), 'y')
 
 figlib.pretty();
 figlib.tight();
