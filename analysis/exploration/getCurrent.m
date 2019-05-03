@@ -4,4 +4,4 @@ function I = getCurrent(V_pre, V_post)
 
   [s_inf, tau_r, u] = getGatingFunctions();
 
-  
+  % TODO: plot steady-state, ss * u, and ss * u * (V - E)
