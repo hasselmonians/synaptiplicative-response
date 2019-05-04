@@ -1,4 +1,4 @@
-function getCurrent(V_pre, V_post)
+function plotCurrent()
   % computes the steady-state current as a function of presynaptic and postsynaptic membrane potential
   % uses equations for the Borgers/Jahr-Stevens NMDA synapse
 
