@@ -10,7 +10,7 @@ function plotIV()
   % evaluate these functions
   sinf    = NaN*V;
   uval    = NaN*V;
-  I       = zeros(length(V), nSteps);
+  I       = zeros(length(V), 11);
 
   % compute the gating functions/time constants
   for ii = 1:length(V)
