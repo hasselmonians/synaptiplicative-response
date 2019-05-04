@@ -15,7 +15,6 @@ function plotIV()
   % compute the gating functions/time constants
   for ii = 1:length(V)
     sinf(ii)  = s_inf(V(ii));
-    taus(ii)  = tau_s(V(ii));
     uval(ii)  = u(V(ii));
   end
 
@@ -31,7 +30,7 @@ function plotIV()
 
   figure('outerposition',[100 100 1000 900],'PaperUnits','points','PaperSize',[1000 500]); hold on
 
-  C = linspecer(size(I, 2));
+  C = colormaps.linspecer(size(I, 2));
 
   for ii = 1:size(I, 2)
     plot(V, I(:, ii), 'Color', C(ii, :));
