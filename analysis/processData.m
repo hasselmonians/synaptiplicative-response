@@ -13,7 +13,7 @@ function [dataTable, param_names] = processData(filepaths)
   assert(numel(dirs) > 0, ['could not find any data files for filepath: ' filepaths])
 
   % load the first dataset
-  data = load(dirs(1).name);
+  data = load(fullfile(dirs(1).folder, dirs(1).name));
   % save the parameter names separately, since it is sized differently
   param_names = data.param_names;
   data = rmfield(data, 'param_names');
@@ -23,7 +23,7 @@ function [dataTable, param_names] = processData(filepaths)
   % for each other dataset, append
   if length(dirs) > 1
     for ii = 2:length(dirs)
-      data = load(dirs(ii).name);
+      data = load(fullfile(dirs(ii).folder, dirs(ii).name));
       data = rmfield(data, 'param_names');
       dataTable2 = struct2table(data);
       dataTable = [dataTable; dataTable2];
