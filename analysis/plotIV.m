@@ -2,60 +2,56 @@ function plotIV()
   % make a plot of steady-state NMDAergic synaptic current vs. presynaptic membrane potential
   % parametrized by postsynaptic membrane potential
 
-  function plotCurrent()
-    % computes the steady-state current as a function of presynaptic and postsynaptic membrane potential
-    % uses equations for the Borgers/Jahr-Stevens NMDA synapse
+  % get the voltage and gating functions
+  V       = linspace(-100,100,1e3);
+  Vpost   = linspace(-100, -20, 11);
+  [s_inf, ~, u] = getGatingFunctions();
 
-    % get the voltage and gating functions
-    V       = linspace(-100,100,1e3);
-    Vpost   = linspace(-100, -20, 11);
-    [s_inf, ~, u] = getGatingFunctions();
+  % evaluate these functions
+  sinf    = NaN*V;
+  uval    = NaN*V;
+  I       = zeros(length(V), nSteps);
 
-    % evaluate these functions
-    sinf    = NaN*V;
-    uval    = NaN*V;
-    I       = zeros(length(V), nSteps);
+  % compute the gating functions/time constants
+  for ii = 1:length(V)
+    sinf(ii)  = s_inf(V(ii));
+    taus(ii)  = tau_s(V(ii));
+    uval(ii)  = u(V(ii));
+  end
 
-    % compute the gating functions/time constants
-    for ii = 1:length(V)
-      sinf(ii)  = s_inf(V(ii));
-      taus(ii)  = tau_s(V(ii));
-      uval(ii)  = u(V(ii));
+  % compute the current as a matrix
+  for ii = 1:length(V)
+    for qq = 1:length(Vpost)
+      I(ii, qq) = sinf(ii) * u(qq) * V(qq);
     end
+  end
 
-    % compute the current as a matrix
-    for ii = 1:length(V)
-      for qq = 1:length(Vpost)
-        I(ii, qq) = sinf(ii) * u(qq) * V(qq);
-      end
-    end
+  %% Plot the figure
+  % 1x1 with many overlaid plots
 
-    %% Plot the figure
-    % 1x1 with many overlaid plots
+  figure('outerposition',[100 100 1000 900],'PaperUnits','points','PaperSize',[1000 500]); hold on
 
-    f = figure('outerposition',[100 100 1000 900],'PaperUnits','points','PaperSize',[1000 500]); hold on
+  C = linspecer(size(I, 2));
 
-    C = linspecer(size(I, 2));
+  for ii = 1:size(I, 2)
+    plot(V, I(:, ii), 'Color', C(ii, :));
+  end
 
-    for ii = 1:size(I, 2)
-      plot(V, I(:, ii), 'Color', C(ii, :));
-    end
+  xlabel('presynaptic membrane potential (mV)')
+  ylabel('norm. current density (nA/mm^2)')
 
-    xlabel('presynaptic membrane potential (mV)')
-    ylabel('norm. current density (nA/mm^2)')
+  c = colorbar('Location', 'EastOutside');
+  c.Label.String = 'V_{post} (mV)';
+  c.TickLength = 1/length(Vpost);
+  caxis([min(Vpost) max(Vpost)]);
+  colormap(colormaps.linspecer)
 
-    c = colorbar('Location', 'EastOutside');
-    c.Label.String = 'V_{post} (mV)';
-    c.TickLength = 1/length(Vpost);
-    caxis([min(Vpost) max(Vpost)]);
-    colormap(colormaps.linspecer)
-
-    try
-    	figlib.pretty();
-    catch
-    end
-
-    % turn all YLim modes to auto
-    for i = 1:length(ax)
-    	ax(i).YLimMode = 'auto';
-    end
+  try
+  	figlib.pretty();
+  catch
+  end
+  %
+  % % turn all YLim modes to auto
+  % for i = 1:length(ax)
+  % 	ax(i).YLimMode = 'auto';
+  % end
