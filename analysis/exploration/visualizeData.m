@@ -43,11 +43,25 @@ tic
 % and can be found in C. Borgers 2017 Ch. 20.
 % The conductance depends on both the presynaptic and postsynaptic membrane potentials
 % as well as time.
-% Magnesium block kinetics are assumed to be instantaneous,
+% Magnesium block kinetics are assumed to be instantaneous (e.g. $\tau_u \rightarrow 0 $),
 % so that only one gating variable is needed.
 %
 % $$ I_{syn}(V_{pre}, V_{post}, t) = \bar{g} s(V_{pre}, t) u(V_{post}) (V_{post} - E_{syn}) $$
 %
+
+%%
+% The gating variable steady-state $s_\infty$, the time constant $\tau_s$,
+% the magnesium-block kinetics $u$, and the normalized steady-state current
+% $ \bar{I}_{\infty} = s_\infty (V_{pre}) u(V_{post}) (V_{post} - E_{syn}) are plotted.
+
+plotCurrent();
+
+figlib.pretty();
+figlib.tight();
+pdflib.snap();
+delete(gcf)
+
+%%
 % The following figure depicts the postsynaptic current response parametrized
 % by fixed postsynaptic membrane potential.
 % The presynaptic compartment is subjected to a 2-ms pulse at 60 mV at $t = 0$ ms.
@@ -60,6 +74,7 @@ figlib.tight();
 
 pdflib.snap
 delete(gcf)
+
 
 %% 1-compartment case
 % In the 1-compartment case, a single compartment representing a cylindrical patch of membrane
