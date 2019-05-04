@@ -4,8 +4,6 @@ function plotCurrent()
 
   [s_inf, tau_s, u] = getGatingFunctions();
 
-  % TODO: plot steady-state, ss * u, and ss * u * (V - E)
-
   % evaluate these functions
   V = linspace(-100,100,1e3);
   sinf = NaN*V;
