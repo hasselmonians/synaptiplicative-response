@@ -62,6 +62,17 @@ pdflib.snap();
 delete(gcf)
 
 %%
+% The IV curve of the NMDAergic postsynaptic current vs. presynaptic membrane potential,
+% parametrized by postsynaptic membrane potential.
+
+plotIV();
+
+figlib.pretty();
+figlib.tight();
+pdflib.snap();
+delete(gcf)
+
+%%
 % The following figure depicts the postsynaptic current response parametrized
 % by fixed postsynaptic membrane potential.
 % The presynaptic compartment is subjected to a 2-ms pulse at 60 mV at $t = 0$ ms.
