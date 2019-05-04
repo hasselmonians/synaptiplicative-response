@@ -76,76 +76,17 @@ pdflib.snap
 delete(gcf)
 
 
-%% 1-compartment case
+%% 1-compartment passive case
 % In the 1-compartment case, a single compartment representing a cylindrical patch of membrane
 % is postsynaptic to two disconnected presynaptic compartments by NMDAergic synapses.
 % In the first experiment, only passive leak channels were included, aside from the synapses.
 % 100 simulations were performed.
 
-% load the data into a data table
-[dataTable, param_names] = processData('~/code/synaptiplicative-response/**/data-comp1-passive*.mat');
+displayDataSummary('comp1-passive', false);
 
-disp(['Models passing: ' num2str(height(dataTable)) '/100'])
-disp('Parameter Names:')
-disp(param_names)
-summary(dataTable)
+%% 1-compartment spiking case
 
-% plot responses in a line plot
-figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1600]);
-plot(dataTable.responses', '-ko', 'MarkerFaceColor', 'k')
-xticks([1 2 3])
-xticklabels({'R_1', 'R_2', 'R_{1,2}'})
-xlabel('response conditions')
-ylabel('response magnitude (mV)')
-xlim([0 4])
-ylim([0.9*min(dataTable.responses(:)), 1.1*max(dataTable.responses(:))])
-title('comp1-passive responses')
-figlib.pretty();
-figlib.tight();
-
-pdflib.snap
-delete(gcf)
-
-% find exemplar
-[~, idx] = min(dataTable.cost);
-x = comp1.passive.model();
-comps = x.find('compartment');
-x.set(param_names, dataTable.params(idx, :));
-
-% compute the membrane potential for the three conditions
-[~, ~, ~, V] = comp1.simulate(x);
-
-% set up presynaptic waveform pulse
-time = (1:length(V))*x.dt;
-pulseWidth  = round(2 / x.dt);
-pulseHeight = 60;
-pulseStart  = round(2 / x.dt);
-pulseStop   = pulseStart + pulseWidth;
-waveform = -60 * ones(length(time), 1);
-waveform(pulseStart:pulseStop, 1) = pulseHeight;
-
-figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1600]);
-ylabels = {'R_1 (mV)', 'R_2 (mV)', 'R_{1,2} (mV)'};
-% minlim = min(V(:)) - 0.01*abs(min(V(:)));
-% maxlim = max(V(:)) + 0.01*abs(max(V(:)));
-for ii = 4:-1:1
-  ax(ii) = subplot(4, 1, ii);
-end
-for ii = 1:3
-  plot(ax(ii), time, V(:,ii), 'k');
-  ylabel(ax(ii), ylabels{ii})
-  % ylim(ax(ii), [minlim maxlim])
-end
-plot(ax(4), time, waveform, 'k');
-xlabel(ax(4), 'time (ms)')
-ylabel(ax(4), 'clamp (mV)')
-linkaxes(ax(1:3), 'y')
-
-figlib.pretty();
-figlib.tight();
-
-pdflib.snap
-delete(gcf)
+displayDataSummary('comp1-spiking', false);
 
 %% Version Info
 pdflib.footer;
