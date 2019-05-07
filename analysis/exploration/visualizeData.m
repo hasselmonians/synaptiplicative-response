@@ -68,7 +68,7 @@ delete(gcf)
 plotIV();
 
 figlib.pretty();
-% figlib.tight();
+figlib.tight();
 pdflib.snap();
 delete(gcf)
 
