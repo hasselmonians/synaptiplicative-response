@@ -94,7 +94,7 @@ delete(gcf)
 figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1600]);
 ax = axes;
 title(ax, 'Peak current w.r.t. postsynaptic potential')
-plot(ax, V, max(I), 'ok');
+plot(ax, V, max(abs(I)), 'ok');
 xlabel(ax, 'postsynaptic holding potential (mV)')
 ylabel(ax, 'peak current response (nA/mm^2)')
 
