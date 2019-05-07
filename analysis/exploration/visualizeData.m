@@ -80,7 +80,7 @@ ax = subplot(1,1,1);
 title(ax, 'NMDA current w.r.t. postsynaptic potential')
 plotSynapse(ax);
 
-pdflib.pretty();
+figlib.pretty();
 pdflib.snap();
 delete(gcf)
 
