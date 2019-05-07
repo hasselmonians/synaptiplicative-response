@@ -1,4 +1,4 @@
-function [t, I, ax] = plotSynapse(ax)
+function [t, I, V_hold, ax] = plotSynapse(ax)
 
 %% Plot Synapse
 % Visualize the synaptic current of an NMDAergic synapse model given varying
