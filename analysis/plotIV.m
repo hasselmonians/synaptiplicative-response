@@ -42,7 +42,7 @@ function plotIV(sinf, u)
 
   c = colorbar('Location', 'EastOutside');
   c.Label.String = 'presynaptic membrane potential (mV)';
-  c.TickLength = 1/length(Vpre);
+  c.Ticks = Vpre;
   caxis([min(Vpre) max(Vpre)]);
   colormap(colormaps.linspecer)
 

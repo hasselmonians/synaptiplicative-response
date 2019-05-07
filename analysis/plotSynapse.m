@@ -66,7 +66,7 @@ if nargin == 0
   ylabel('current density')
   c = colorbar('Location', 'EastOutside');
   c.Label.String = 'V_{post} (mV)';
-  c.TickLength = 1/length(V_hold);
+  c.Ticks = Vhold;
   caxis([min(V_hold) max(V_hold)]);
   colormap(colormaps.linspecer)
   figlib.pretty();
@@ -79,7 +79,7 @@ else
   ylabel(ax, 'current density')
   c = colorbar(ax, 'Location', 'EastOutside');
   c.Label.String = 'V_{post} (mV)';
-  c.TickLength = 1/length(V_hold);
+  c.Ticks = Vhold;
   caxis([min(V_hold) max(V_hold)]);
   colormap(colormaps.linspecer)
   figlib.pretty();
