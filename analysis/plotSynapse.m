@@ -70,7 +70,7 @@ xlabel(ax, 'time (ms)')
 ylabel(ax, 'current density')
 c = colorbar(ax, 'Location', 'EastOutside');
 c.Label.String = 'V_{post} (mV)';
-c.Ticks = Vhold;
+c.Ticks = V_hold;
 caxis(ax, [min(V_hold) max(V_hold)]);
 colormap(ax, colormaps.linspecer);
 figlib.pretty();
