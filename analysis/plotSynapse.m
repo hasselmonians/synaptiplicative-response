@@ -57,30 +57,20 @@ end
 t = x.dt * ((1:length(I)) - pulseStart);
 C = colormaps.linspecer(size(I, 2));
 
-if nargin == 0
+if nargin < 1 || isempty(ax)
   figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
-  for ii = 1:size(I, 2)
-    plot(t, I(:, ii), 'Color', C(ii, :));
-  end
-  xlabel('time (ms)')
-  ylabel('current density')
-  c = colorbar('Location', 'EastOutside');
-  c.Label.String = 'V_{post} (mV)';
-  c.Ticks = V_hold;
-  caxis([min(V_hold) max(V_hold)]);
-  colormap(colormaps.linspecer);
-  figlib.pretty();
-else
-  hold(ax, 'on');
-  for ii = 1:size(I, 2)
-    plot(t, I(:, ii), 'Color', C(ii, :));
-  end
-  xlabel(ax, 'time (ms)')
-  ylabel(ax, 'current density')
-  c = colorbar(ax, 'Location', 'EastOutside');
-  c.Label.String = 'V_{post} (mV)';
-  c.Ticks = Vhold;
-  caxis([min(V_hold) max(V_hold)]);
-  colormap(colormaps.linspecer);
-  figlib.pretty();
+  ax = axes;
 end
+
+hold(ax, 'on');
+for ii = 1:size(I, 2)
+  plot(ax, t, I(:, ii), 'Color', C(ii, :));
+end
+xlabel(ax, 'time (ms)')
+ylabel(ax, 'current density')
+c = colorbar(ax, 'Location', 'EastOutside');
+c.Label.String = 'V_{post} (mV)';
+c.Ticks = Vhold;
+caxis(ax, [min(V_hold) max(V_hold)]);
+colormap(ax, colormaps.linspecer);
+figlib.pretty();

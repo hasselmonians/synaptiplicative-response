@@ -1,4 +1,4 @@
-function plotIV(sinf, u)
+function plotIV(ax, sinf, u)
   % make a plot of steady-state NMDAergic synaptic current vs. presynaptic membrane potential
   % parametrized by postsynaptic membrane potential
 
@@ -6,11 +6,11 @@ function plotIV(sinf, u)
   Vpre    = linspace(-20, 100, 21);
   Vpost   = linspace(-100, 100, 1e3+1);
 
-  if nargin < 1
+  if nargin < 2
     [sinf, ~, u] = getGatingFunctions();
   end
 
-  if nargin < 2
+  if nargin < 3
     [~, ~, u] = getGatingFunctions();
   end
 
@@ -25,33 +25,32 @@ function plotIV(sinf, u)
   %% Plot the figure
   % 1x1 with many overlaid plots
 
-  figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
+  if nargin < 1 || isempty(ax)
+    figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
+    ax = axes;
+  end
 
   C = colormaps.linspecer(length(Vpre));
 
+  hold(ax, 'on');
   for ii = 1:size(I, 2)
-    plot(Vpost, I(:, ii), 'Color', C(ii, :));
+    plot(ax, Vpost, I(:, ii), 'Color', C(ii, :));
   end
 
-  xlabel('postsynaptic membrane potential (mV)')
-  ylabel('norm. current density (nA/mm^2)')
+  xlabel(ax, 'postsynaptic membrane potential (mV)')
+  ylabel(ax, 'norm. current density (nA/mm^2)')
   yoffset = max([abs(min(I(:))), abs(max(I(:)))]);
   ymin = min(I(:)) - 0.1 * yoffset;
   ymax = max(I(:)) + 0.1 * yoffset;
-  ylim([ymin ymax])
+  ylim(ax, [ymin ymax])
 
-  c = colorbar('Location', 'EastOutside');
+  c = colorbar(ax, 'Location', 'EastOutside');
   c.Label.String = 'presynaptic membrane potential (mV)';
   c.Ticks = Vpre;
-  caxis([min(Vpre) max(Vpre)]);
-  colormap(colormaps.linspecer)
+  caxis(ax, [min(Vpre) max(Vpre)]);
+  colormap(ax, colormaps.linspecer)
 
   try
   	figlib.pretty();
   catch
   end
-  %
-  % % turn all YLim modes to auto
-  % for i = 1:length(ax)
-  % 	ax(i).YLimMode = 'auto';
-  % end
