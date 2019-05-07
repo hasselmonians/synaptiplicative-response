@@ -28,7 +28,7 @@ function plotIV()
   %% Plot the figure
   % 1x1 with many overlaid plots
 
-  figure('outerposition',[100 100 600 600],'PaperUnits','points','PaperSize',[1000 500]); hold on
+  figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 600]); hold on
 
   C = colormaps.linspecer(size(I, 2));
 
