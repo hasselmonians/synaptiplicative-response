@@ -20,7 +20,7 @@ function plotCurrent()
   %% Plot the figure
   % 2x2 grid
 
-  f = figure('outerposition',[100 100 1000 900],'PaperUnits','points','PaperSize',[1000 500]); hold on
+  f = figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
   for ii = 4:-1:1
     ax(ii) = subplot(2,2,ii); hold on
   end

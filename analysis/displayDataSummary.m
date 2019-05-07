@@ -39,7 +39,7 @@ function displayDataSummary_core(keyword, being_published)
   summary(dataTable)
 
   % plot all responses in a line plot
-  figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1600]);
+  figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
   plot(dataTable.responses', '-ko', 'MarkerFaceColor', 'k')
   xticks([1 2 3])
   xticklabels({'R_1', 'R_2', 'R_{1,2}'})
@@ -77,7 +77,7 @@ function displayDataSummary_core(keyword, being_published)
   waveform(pulseStart:pulseStop, 1) = pulseHeight;
 
   % plot exemplar responses as a function of time
-  figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1600]);
+  figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
   ylabels = {'R_1 (mV)', 'R_2 (mV)', 'R_{1,2} (mV)'};
   % minlim = min(V(:)) - 0.01*abs(min(V(:)));
   % maxlim = max(V(:)) + 0.01*abs(max(V(:)));

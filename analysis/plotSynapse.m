@@ -58,7 +58,7 @@ t = x.dt * ((1:length(I)) - pulseStart);
 C = colormaps.linspecer(size(I, 2));
 
 if nargin == 0
-  figure; hold on;
+  figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
   for ii = 1:size(I, 2)
     plot(t, I(:, ii), 'Color', C(ii, :));
   end
