@@ -97,6 +97,18 @@ displayDataSummary('comp1-passive', false);
 
 displayDataSummary('comp1-spiking', false);
 
+%% figure test
+
+h = figure;
+plot(1:10);
+set(h,'Units','Inches');
+pos = get(h,'Position');
+set(h,'PaperPositionMode','Auto', 'OuterPosition', [0 0 6.5 6.5], 'PaperUnits','Inches','PaperSize',[8.5, 11])
+
+figlib.pretty()
+pdflib.snap()
+delete(gcf)
+
 %% Version Info
 pdflib.footer;
 time = toc;
