@@ -1,11 +1,18 @@
-function plotIV()
+function plotIV(sinf, u)
   % make a plot of steady-state NMDAergic synaptic current vs. presynaptic membrane potential
   % parametrized by postsynaptic membrane potential
 
   % get the voltage and gating functions
   Vpre    = linspace(-20, 100, 21);
   Vpost   = linspace(-100, 100, 1e3+1);
-  [sinf, ~, u] = getGatingFunctions();
+
+  if nargin < 1
+    [sinf, ~, u] = getGatingFunctions();
+  end
+
+  if nargin < 2
+    [~, ~, u] = getGatingFunctions();
+  end
 
   % compute the current as a matrix
   I       = zeros(length(Vpost), length(Vpre));
