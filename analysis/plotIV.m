@@ -21,7 +21,7 @@ function plotIV()
   % compute the current as a matrix
   for ii = 1:length(V)
     for qq = 1:length(Vpost)
-      I(ii, qq) = sinf(ii) * u(qq) * V(qq);
+      I(ii, qq) = sinf(ii) * uval(qq) * V(ii);
     end
   end
 
@@ -38,6 +38,10 @@ function plotIV()
 
   xlabel('presynaptic membrane potential (mV)')
   ylabel('norm. current density (nA/mm^2)')
+  yoffset = max([abs(min(I(:))), abs(max(I(:)))]);
+  ymin = min(I(:)) - 0.1 * yoffset;
+  ymax = max(I(:)) + 0.1 * yoffset;
+  ylim([ymin ymax])
 
   c = colorbar('Location', 'EastOutside');
   c.Label.String = 'V_{post} (mV)';
