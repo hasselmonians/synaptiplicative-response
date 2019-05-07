@@ -3,25 +3,15 @@ function plotIV()
   % parametrized by postsynaptic membrane potential
 
   % get the voltage and gating functions
-  V       = linspace(-100,100,1e3);
-  Vpost   = linspace(-100, -20, 11);
-  [s_inf, ~, u] = getGatingFunctions();
-
-  % evaluate these functions
-  sinf    = NaN*V;
-  uval    = NaN*V;
-  I       = zeros(length(V), 11);
-
-  % compute the gating functions/time constants
-  for ii = 1:length(V)
-    sinf(ii)  = s_inf(V(ii));
-    uval(ii)  = u(V(ii));
-  end
+  Vpre    = linspace(-20, 100, 21);
+  Vpost   = linspace(-100, 100, 1e3+1);
+  [sinf, ~, u] = getGatingFunctions();
 
   % compute the current as a matrix
-  for ii = 1:length(V)
-    for qq = 1:length(Vpost)
-      I(ii, qq) = sinf(ii) * uval(qq) * V(ii);
+  I       = zeros(length(Vpost), length(Vpre));
+  for ii = 1:length(Vpost)
+    for qq = 1:length(Vpre)
+      I(ii, qq) = sinf(Vpre(qq)) * u(Vpost(ii)) * Vpost(ii);
     end
   end
 
@@ -30,13 +20,13 @@ function plotIV()
 
   figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
 
-  C = colormaps.linspecer(size(I, 2));
+  C = colormaps.linspecer(length(Vpre));
 
   for ii = 1:size(I, 2)
-    plot(V, I(:, ii), 'Color', C(ii, :));
+    plot(Vpost, I(:, ii), 'Color', C(ii, :));
   end
 
-  xlabel('presynaptic membrane potential (mV)')
+  xlabel('postsynaptic membrane potential (mV)')
   ylabel('norm. current density (nA/mm^2)')
   yoffset = max([abs(min(I(:))), abs(max(I(:)))]);
   ymin = min(I(:)) - 0.1 * yoffset;
@@ -44,9 +34,9 @@ function plotIV()
   ylim([ymin ymax])
 
   c = colorbar('Location', 'EastOutside');
-  c.Label.String = 'V_{post} (mV)';
-  c.TickLength = 1/length(Vpost);
-  caxis([min(Vpost) max(Vpost)]);
+  c.Label.String = 'presynaptic membrane potential (mV)';
+  c.TickLength = 1/length(Vpre);
+  caxis([min(Vpre) max(Vpre)]);
   colormap(colormaps.linspecer)
 
   try
