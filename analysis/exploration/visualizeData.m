@@ -54,7 +54,10 @@ tic
 % the magnesium-block kinetics $u$, and the normalized steady-state current
 % $\bar{I}_{\infty} = s_\infty (V_{pre}) u(V_{post}) (V_{post} - E_{syn})$ are plotted.
 
-plotCurrent();
+figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1600]);
+ax = axes;
+title(ax, 'NMDA synapse dynamics')
+plotCurrent(ax);
 
 figlib.pretty();
 pdflib.snap();
@@ -64,7 +67,10 @@ delete(gcf)
 % The IV curve of the NMDAergic postsynaptic current vs. presynaptic membrane potential,
 % parametrized by postsynaptic membrane potential.
 
-plotIV();
+figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1600]);
+ax = axes;
+title(ax, 'NMDA synapse IV curve')
+plotIV(ax);
 
 figlib.pretty();
 pdflib.snap();
@@ -76,14 +82,27 @@ delete(gcf)
 % The presynaptic compartment is subjected to a 2-ms pulse at 60 mV at $t = 0$ ms.
 
 figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1600]);
-ax = subplot(1,1,1);
+ax = axes;
 title(ax, 'NMDA current w.r.t. postsynaptic potential')
-plotSynapse(ax);
+[~, I, V] = plotSynapse(ax);
 
 figlib.pretty();
 pdflib.snap();
 delete(gcf)
 
+%%
+% From the previous simulation, the peak current versus the postsynaptic holding current.
+
+figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1600]);
+ax = axes;
+title(ax, 'Peak current w.r.t. postsynaptic potential')
+plot(ax, V, max(I), 'ok');
+xlabel(ax, 'postsynaptic holding potential (mV)')
+ylabel(ax, 'peak current response (nA/mm^2)')
+
+figlib.pretty();
+pdflib.snap();
+delete(gcf)
 
 %% 1-compartment passive case
 % In the 1-compartment case, a single compartment representing a cylindrical patch of membrane
