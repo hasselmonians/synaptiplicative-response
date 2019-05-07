@@ -1,4 +1,4 @@
-function plotCurrent()
+function plotCurrent(fig)
   % computes the steady-state current as a function of presynaptic and postsynaptic membrane potential
   % uses equations for the Borgers/Jahr-Stevens NMDA synapse
 
@@ -20,7 +20,12 @@ function plotCurrent()
   %% Plot the figure
   % 2x2 grid
 
-  f = figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
+  if nargin < 1
+    fig = figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
+  else
+    set(0, 'CurrentFigure', fig);
+  end
+
   for ii = 4:-1:1
     ax(ii) = subplot(2,2,ii); hold on
   end

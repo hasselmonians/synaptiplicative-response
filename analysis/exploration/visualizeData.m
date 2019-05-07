@@ -54,10 +54,8 @@ tic
 % the magnesium-block kinetics $u$, and the normalized steady-state current
 % $\bar{I}_{\infty} = s_\infty (V_{pre}) u(V_{post}) (V_{post} - E_{syn})$ are plotted.
 
-figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1600]);
-ax = axes;
-title(ax, 'NMDA synapse dynamics')
-plotCurrent(ax);
+fig = figure('OuterPosition',[0 0 1600 1600],'PaperUnits','points','PaperSize',[1600 1600]);
+plotCurrent(fig);
 
 figlib.pretty();
 pdflib.snap();
