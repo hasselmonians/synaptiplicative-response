@@ -14,7 +14,7 @@ x.add('compartment', 'Dendrite', 'Cm', 30, 'radius', 4e-3, 'len', 110e-3);
 x.add('compartment', 'Presynaptic', 'Cm', 30, 'radius', 4e-3, 'len', 110e-3);
 x.Dendrite.add('Leak', 'gbar', 0.1, 'E', -60);
 x.Presynaptic.add('Leak', 'gbar', 0.1, 'E', -60);
-x.connect('Presynaptic', 'Dendrite', 'borgers/NMDAergic', 'gmax', 1, 'Mg', 1, 'tau_d', 30, 'tau_r', 2, 'E', 0);
+x.connect('Presynaptic', 'Dendrite', 'borgers/NMDAergic', 'gmax', 1, 'Mg', 1, 'tau_d', 300, 'tau_r', 2, 'E', 0);
 
 %% Set up simulation
 
@@ -28,7 +28,7 @@ pulseStop   = pulseStart + pulseWidth;
 pulseHeight = 60;
 
 % set up voltage clamp
-V_clamp = -60 * ones(x.t_end / x.dt, 2);
+V_clamp = -60 * ones(x.t_end / x.dt, 2); % presynaptic compartment
 V_clamp(pulseStart:pulseStop, 2) = pulseHeight;
 
 % set up increasing holding potential for post-synaptic compartment
@@ -45,7 +45,7 @@ x.closed_loop = false;
 % perform loop
 for ii = 1:13
   % set up voltage clamp
-  V_clamp(:, 1) = V_hold(ii);
+  V_clamp(:, 1) = V_hold(ii); % postsynaptic compartment
   x.V_clamp = V_clamp;
   % perform integration
   [~, ~, ~, ~, Isyn] = x.integrate;
@@ -54,7 +54,7 @@ end
 
 %% Plot the results
 
-t = x.dt * ((1:length(I)) - pulseStart);
+t = x.dt * ((1:length(I)) - pulseStart); % pulse starts at t = 0
 C = colormaps.linspecer(size(I, 2));
 
 if nargin < 1 || isempty(ax)
