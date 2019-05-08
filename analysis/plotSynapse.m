@@ -59,7 +59,7 @@ C = colormaps.linspecer(size(I, 2));
 
 if nargin < 1 || isempty(ax)
   figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
-  ax = axes;
+  ax = gca;
 end
 
 hold(ax, 'on');
