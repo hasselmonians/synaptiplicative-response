@@ -14,12 +14,14 @@ x.add('compartment', 'Dendrite', 'Cm', 30, 'radius', 4e-3, 'len', 110e-3);
 x.add('compartment', 'Presynaptic', 'Cm', 30, 'radius', 4e-3, 'len', 110e-3);
 x.Dendrite.add('Leak', 'gbar', 0.1, 'E', -60);
 x.Presynaptic.add('Leak', 'gbar', 0.1, 'E', -60);
-x.connect('Presynaptic', 'Dendrite', 'borgers/NMDAergic', 'gmax', 1, 'Mg', 2, 'tau_d', 300, 'tau_r', 2, 'E', 0);
+x.connect('Presynaptic', 'Dendrite', 'borgers/NMDAergic', 'gmax', 1, 'Mg', 2, 'tau_d', 30, 'tau_r', 2, 'E', 0);
 
 %% Set up simulation
 
 % time parameters
 x.t_end = 100;
+x.dt = 1e-3;
+x.sim_dt = 1e-3;
 
 % set up pulse
 pulseStart  = 30 / x.dt;
@@ -49,7 +51,7 @@ for ii = 1:13
   x.V_clamp = V_clamp;
   % perform integration
   [~, ~, ~, ~, Isyn] = x.integrate;
-  I(:, ii) = Isyn(:, 2);
+  I(:, ii) = Isyn(:, 3);
 end
 
 %% Plot the results
