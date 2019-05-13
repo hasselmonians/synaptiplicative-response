@@ -14,7 +14,7 @@ x.add('compartment', 'Dendrite', 'Cm', 30, 'radius', 4e-3, 'len', 110e-3);
 x.add('compartment', 'Presynaptic', 'Cm', 30, 'radius', 4e-3, 'len', 110e-3);
 x.Dendrite.add('Leak', 'gbar', 0.1, 'E', -60);
 x.Presynaptic.add('Leak', 'gbar', 0.1, 'E', -60);
-x.connect('Presynaptic', 'Dendrite', 'borgers/NMDAergic', 'gmax', 1, 'Mg', 1, 'tau_d', 300, 'tau_r', 2, 'E', 0);
+x.connect('Presynaptic', 'Dendrite', 'borgers/NMDAergic', 'gmax', 1, 'Mg', 2, 'tau_d', 300, 'tau_r', 2, 'E', 0);
 
 %% Set up simulation
 

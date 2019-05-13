@@ -22,7 +22,7 @@ function x = model()
 
   %% Connect presynaptic compartments to postsynaptic compartments
 
-  x.connect('Presynaptic1', 'Dendrite', 'borgers/NMDAergic', 'gmax', 0, 'Mg', 1, 'tau_d', 30, 'tau_r', 2, 'E', 0);
-  x.connect('Presynaptic2', 'Dendrite', 'borgers/NMDAergic', 'gmax', 0, 'Mg', 1, 'tau_d', 30, 'tau_r', 2, 'E', 0);
+  x.connect('Presynaptic1', 'Dendrite', 'borgers/NMDAergic', 'gmax', 0, 'Mg', 2, 'tau_d', 30, 'tau_r', 2, 'E', 0);
+  x.connect('Presynaptic2', 'Dendrite', 'borgers/NMDAergic', 'gmax', 0, 'Mg', 2, 'tau_d', 30, 'tau_r', 2, 'E', 0);
 
 end
