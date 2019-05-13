@@ -4,7 +4,7 @@ function plotGatingVariable(ax)
 
   if nargin < 1 || isempty(ax)
     fig = figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
-    ax = axes;
+    ax = gca;
   end
 
   V = linspace(-50, 50, 1e3+1);
