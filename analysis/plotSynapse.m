@@ -34,18 +34,18 @@ V_clamp = -60 * ones(x.t_end / x.dt, 2); % presynaptic compartment
 V_clamp(pulseStart:pulseStop, 2) = pulseHeight;
 
 % set up increasing holding potential for post-synaptic compartment
-V_hold = linspace(-60, 60, 13);
+V_hold = linspace(-70, 0, 8);
 
 %% Perform simulation
 
 % output variables
-I = NaN(x.t_end / x.dt, 13);
+I = NaN(x.t_end / x.dt, 8);
 
 % pre-simulation parameters
 x.closed_loop = false;
 
 % perform loop
-for ii = 1:13
+for ii = 1:8
   % set up voltage clamp
   V_clamp(:, 1) = V_hold(ii); % postsynaptic compartment
   x.V_clamp = V_clamp;
