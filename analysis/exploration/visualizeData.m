@@ -108,11 +108,18 @@ delete(gcf)
 % In the first experiment, only passive leak channels were included, aside from the synapses.
 % 100 simulations were performed.
 
-displayDataSummary('comp1-passive', false);
-
+try
+  displayDataSummary('comp1-passive', false);
+catch
+  disp('no data available')
+end
 %% 1-compartment spiking case
 
-displayDataSummary('comp1-spiking', false);
+try
+  displayDataSummary('comp1-spiking', false);
+catch
+  disp('no data available')
+end
 
 %% Version Info
 pdflib.footer;
