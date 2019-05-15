@@ -1,15 +1,17 @@
-function [dataTable, param_names, x] = processData(filekey)
+function [dataTable, param_names, x] = processData(filekey, pkgkey)
   % gathers data from .mat files produced by simulations
   % that match the pattern in `filekey`
   % and performs some filtering
   %
-  % Ex: processData('data-comp1-passive*')
+  % Ex: processData('data-comp1-passive*', {'comp1', 'passive'})
   %
   % the data are expected to have cost, costParts, params, and responses as fields
   % 
   % Arguments:
-  %   filekey: data files saved in the format 'data-info1-info2-...-infon.mat'
+  %   filekey: data files saved as .mat files
   %     must be a character vector
+  %   pkgkey: a cell array used to access the model() function
+  %    Ex: {'comp1', 'passive'}
 
   %% Gather the data into a table
 
@@ -42,8 +44,7 @@ function [dataTable, param_names, x] = processData(filekey)
   %% Instantiate the xolotl object
   
   if nargout > 2
-    keys = split(filekey, '-');
-    x = eval([keys{1} '.' keys{2} '.model()']);
+    x = eval([pkgkey{1} '.' pkgkey{2} '.model()']);
   end
 
 end % function
