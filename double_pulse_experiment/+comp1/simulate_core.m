@@ -1,4 +1,19 @@
 function [r, V] = simulation_core(x, comps, trial, pulseStart, pulseStop, pulseHeight)
+  
+  % Arguments:
+  %   x: the xolotl object
+  %   comps: a cell array listing the compartment names (e.g. x.find('compartment'))
+  %   trial: a scalar integer, 1, 2, or 3
+  %   pulseStart: scalar integer in time-steps, when the pulse starts
+  %   pulseStop: scalar integer in time-steps, when the pulse stops
+  %   pulseHeight: scalar in mV, amplitude of the pulse
+  % 
+  % Outputs:
+  %   r: 1x1 measuring the response amplitude in mV
+  %   V: n x 1 recording the membrane potential time series in mV
+  %     n = x.t_end / x.dt
+  
+  
   % reset to steady-state
   x.reset('steady-state');
   % x.t_end     = 100;
