@@ -73,7 +73,7 @@ function displayDataSummary_core(keyword, being_published)
   pulseHeight = 60;
   pulseStart  = round(2 / x.dt);
   pulseStop   = pulseStart + pulseWidth;
-  waveform = -60 * ones(length(time), 1);
+  waveform = -70 * ones(length(time), 1);
   waveform(pulseStart:pulseStop, 1) = pulseHeight;
 
   % plot exemplar responses as a function of time
