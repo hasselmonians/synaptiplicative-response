@@ -1,4 +1,4 @@
-function [cost, costParts, R, V] = simulate(x, ~, ~)
+function [cost, costParts, response, V] = simulate(x, ~, ~)
   
   %% Preamble
   % compute the steady-state
@@ -31,10 +31,10 @@ function [cost, costParts, R, V] = simulate(x, ~, ~)
   pulse_NMDA        = -70 * ones(length(V), 1);
   pulse_NMDA(pulseStart_NMDA:pulseStop_NMDA) = pulseHeight_NMDA;
   
-  [R(1), V(:,1)]   = comp1.simulate_core(x, comps, 1, pulse_AMPA, pulse_NMDA);
-  [R(2), V(:,2)]   = comp1.simulate_core(x, comps, 2, pulse_AMPA, pulse_NMDA);
-  [R(3), V(:,3)]   = comp1.simulate_core(x, comps, 3, pulse_AMPA, pulse_NMDA);
+  [response(1), V(:,1)]   = comp1.simulate_core(x, comps, 1, pulse_AMPA, pulse_NMDA);
+  [response(2), V(:,2)]   = comp1.simulate_core(x, comps, 2, pulse_AMPA, pulse_NMDA);
+  [response(3), V(:,3)]   = comp1.simulate_core(x, comps, 3, pulse_AMPA, pulse_NMDA);
 
-  [cost, costParts] = costFunction(R, epsilon, lambda);
+  [cost, costParts] = costFunction(response, epsilon, lambda);
     
 end % function

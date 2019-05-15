@@ -42,6 +42,6 @@ function [cost, costParts, response, V] = simulate(x, ~, ~)
   [response(2), V(:,2)]   = comp1.simulate_core(x, comps, 2, pulseStart, pulseStop, pulseHeight);
   [response(3), V(:,3)]   = comp1.simulate_core(x, comps, 3, pulseStart, pulseStop, pulseHeight);
 
-  [cost, costParts] = costFunction(R, epsilon, lambda);
+  [cost, costParts] = costFunction(response, epsilon, lambda);
 
 end % function
