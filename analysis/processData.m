@@ -1,16 +1,20 @@
-function [dataTable, param_names] = processData(filepaths)
+function [dataTable, param_names, x] = processData(filekey)
   % gathers data from .mat files produced by simulations
-  % that match the pattern in `filepaths`
+  % that match the pattern in `filekey`
   % and performs some filtering
   %
   % Ex: processData('data-comp1-passive*')
   %
   % the data are expected to have cost, costParts, params, and responses as fields
+  % 
+  % Arguments:
+  %   filekey: data files saved in the format 'data-info1-info2-...-infon.mat'
+  %     must be a character vector
 
   %% Gather the data into a table
 
-  dirs = dir(filepaths);
-  assert(numel(dirs) > 0, ['could not find any data files for filepath: ' filepaths])
+  dirs = dir(filekey);
+  assert(numel(dirs) > 0, ['could not find any data files for filepath: ' filekey])
 
   % load the first dataset
   data = load(fullfile(dirs(1).folder, dirs(1).name));
@@ -34,5 +38,12 @@ function [dataTable, param_names] = processData(filepaths)
 
   % failing is defined as having a cost >= 1e4
   dataTable = dataTable(dataTable.cost < 1e4, :);
+  
+  %% Instantiate the xolotl object
+  
+  if nargout > 2
+    keys = split(filekey, '-');
+    x = eval([keys{1} '.' keys{2} '.model()']);
+  end
 
 end % function
