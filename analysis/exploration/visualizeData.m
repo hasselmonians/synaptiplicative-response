@@ -109,14 +109,22 @@ delete(gcf)
 % 100 simulations were performed.
 
 try
-  displayDataSummary('comp1-passive', false);
+  displayDataSummary('~/code/synaptiplicative-response/data/data-comp1-passive*', false);
 catch
   disp('no data available')
 end
+
+try
+  plotExemplars('~/code/synaptiplicative-response/data/data-comp1-passive*', {'comp1', 'passive'}, 30);
+  pdflib.snap
+  delete(gcf)
+catch
+end
+
 %% 1-compartment spiking case
 
 try
-  displayDataSummary('comp1-spiking', false);
+  displayDataSummary('~/code/synaptiplicative-response/data/data-comp1-spiking*', false);
 catch
   disp('no data available')
 end

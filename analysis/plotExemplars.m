@@ -50,6 +50,10 @@ function plotExemplars(filekey, pkgkey, indices)
     % pick the top ten
     [~, indices] = sort(dataTable.cost);
     indices = indices(1:10);
+  else
+    index = indices;
+    [~, indices] = sort(dataTable.cost);
+    indices = indices(1:index);
   end
   
   % create the legend array
