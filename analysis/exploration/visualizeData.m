@@ -109,13 +109,13 @@ delete(gcf)
 % 100 simulations were performed.
 
 try
-  displayDataSummary('~/code/synaptiplicative-response/data/data-comp1-passive*', false);
+  displayDataSummary('comp1-passive', true);
 catch
   disp('no data available')
 end
 
 try
-  plotExemplars('~/code/synaptiplicative-response/data/data-comp1-passive*', {'comp1', 'passive'}, 30);
+  plotExemplars('comp1-passive', 10);
   pdflib.snap
   delete(gcf)
 catch

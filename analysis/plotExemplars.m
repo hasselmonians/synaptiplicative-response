@@ -1,4 +1,4 @@
-function plotExemplars(filekey, pkgkey, indices)
+function plotExemplars(filekey, indices)
   
   % plots the results of a double-pulse experiment
   % as response traces vs. time
@@ -43,7 +43,11 @@ function plotExemplars(filekey, pkgkey, indices)
   
   %% Create the data table and xolotl object
   
-  [dataTable, param_names, x] = processData(filekey, pkgkey);
+  fk = fullfile(fileparts(mfilename('fullpath')), ['data-', filekey, '*.mat']);
+  fk = strrep(fk, 'analysis', 'data');
+  pkgkey = split(filekey, '-');
+  
+  [dataTable, param_names, x] = processData(fk, pkgkey);
   
   % determine the correct indices
   if nargin < 3
