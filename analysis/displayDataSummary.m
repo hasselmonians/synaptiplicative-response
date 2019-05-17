@@ -47,7 +47,7 @@ function displayDataSummary_core(keyword, being_published)
   ylabel('response magnitude (\muV)')
   xlim([0 4])
   ylim(1000*[0, 1.1*max(dataTable.responses(:))])
-  title([keyword 'responses'])
+  title([keyword ' responses'])
 
   figlib.pretty();
   figlib.tight();
