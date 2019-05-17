@@ -1,19 +1,21 @@
-function [dataTable, param_names, x] = processData(filekey, pkgkey)
+function [dataTable, param_names, x] = processData(keyword)
   % gathers data from .mat files produced by simulations
   % that match the pattern in `filekey`
   % and performs some filtering
   %
-  % Ex: processData('data-comp1-passive*', {'comp1', 'passive'})
+  % Ex: processData('comp1-passive')
   %
   % the data are expected to have cost, costParts, params, and responses as fields
   % 
   % Arguments:
-  %   filekey: data files saved as .mat files
-  %     must be a character vector
-  %   pkgkey: a cell array used to access the model() function
-  %    Ex: {'comp1', 'passive'}
+  %   filekey: character vector of one or two keywords separated by a dash '-'
+  %     e.g. 'comp1-passive' or 'comp2-transient'
 
   %% Gather the data into a table
+  
+  filekey = fullfile(fileparts(mfilename('fullpath')), ['data-', keyword, '*.mat']);
+  filekey = strrep(filekey, 'analysis', 'data');
+  pkgkey  = split(keyword, '-');
 
   dirs = dir(filekey);
   assert(numel(dirs) > 0, ['could not find any data files for filepath: ' filekey])
