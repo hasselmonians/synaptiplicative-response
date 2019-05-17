@@ -32,7 +32,7 @@ function displayDataSummary_core(keyword, being_published)
   [dataTable, param_names] = processData(keyword);
 
   % display summary statistics
-  disp(['Models passing: ' num2str(height(dataTable)) '/100'])
+  disp(['Models passing: ' num2str(height(dataTable)) '/1000'])
   disp('Parameter Names:')
   disp(param_names)
   summary(dataTable)
