@@ -43,11 +43,7 @@ function plotExemplars(filekey, indices)
   
   %% Create the data table and xolotl object
   
-  fk = fullfile(fileparts(mfilename('fullpath')), ['data-', filekey, '*.mat']);
-  fk = strrep(fk, 'analysis', 'data');
-  pkgkey = split(filekey, '-');
-  
-  [dataTable, param_names, x] = processData(fk, pkgkey);
+  [dataTable, param_names, x] = processData(filekey);
   
   % determine the correct indices
   if nargin < 3
