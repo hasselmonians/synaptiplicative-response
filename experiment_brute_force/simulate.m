@@ -7,7 +7,7 @@ function [responses] = simulate(x)
   x = setSteadyState(x);
   
   % preallocate output variables
-  response  = zeros(3,1);
+  responses  = zeros(3,1);
   
   % useful variables
   comps     = x.find('compartment');
@@ -22,9 +22,9 @@ function [responses] = simulate(x)
   
   % perform the three simulations
 
-  response(1) = simulate_core(x, comps, 1, pulse);
-  response(2) = simulate_core(x, comps, 2, pulse);
-  response(3) = simulate_core(x, comps, 3, pulse);
+  responses(1) = simulate_core(x, comps, 1, pulse);
+  responses(2) = simulate_core(x, comps, 2, pulse);
+  responses(3) = simulate_core(x, comps, 3, pulse);
   
 end % function
 
