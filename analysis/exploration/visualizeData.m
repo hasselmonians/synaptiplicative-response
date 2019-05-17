@@ -124,7 +124,7 @@ end
 %% 1-compartment spiking case
 
 try
-  displayDataSummary('~/code/synaptiplicative-response/data/data-comp1-spiking*', false);
+  displayDataSummary('comp1-spiking', true);
 catch
   disp('no data available')
 end
