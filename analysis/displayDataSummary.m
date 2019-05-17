@@ -28,9 +28,8 @@ function displayDataSummary_core(keyword, being_published)
   % load the data and grab the parameter names
   % data should be in /**/synaptiplicative-response/data/
   % and named 'data-keyword*.mat'
-  filekey = fullfile(fileparts(mfilename('fullpath')), ['data-', keyword, '*.mat']);
-  filekey = strrep(filekey, 'analysis', 'data');
-  [dataTable, param_names] = processData(filekey);
+  
+  [dataTable, param_names] = processData(keyword);
 
   % display summary statistics
   disp(['Models passing: ' num2str(height(dataTable)) '/100'])
