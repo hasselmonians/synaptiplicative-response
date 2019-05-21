@@ -3,7 +3,8 @@ function plotIV(ax, u)
   % parametrized by presynaptic membrane potential
 
   % get the voltage and gating functions
-  Vpost   = linspace(-70, 0, 1e3+1);
+  Vpost   = linspace(-150, 0, 1e3+1);
+  E       = 0;
 
   if nargin < 2
     [~, ~, u] = getGatingFunctions();
@@ -12,7 +13,7 @@ function plotIV(ax, u)
   % compute the current
   I       = zeros(length(Vpost), 1);
   for ii = 1:length(Vpost)
-      I(ii) = u(Vpost(ii)) * Vpost(ii);
+      I(ii) = u(Vpost(ii)) * (Vpost(ii) - E);
   end
 
   %% Plot the figure
