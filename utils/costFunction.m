@@ -32,7 +32,7 @@ function [cost, costParts] = costFunction(R, epsilon, lambda, bounds)
     epsilon = 1e3 * epsilon;
 
     % useful variables
-    multiplicative  = R(3) - R(1)*R(2);
+    multiplicative  = R(3) - (R(1)*R(2) / epsilon);
     additive        = R(3) - R(1) - R(2);
 
     % cost due to insignificance of response
