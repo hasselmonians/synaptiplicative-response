@@ -27,7 +27,7 @@ function displayDataSummary(keywords, cutoff, being_published)
   end
 
   for ii = 1:length(keywords)
-    displayDataSummary_core(keywords{ii}, being_published);
+    displayDataSummary_core(keywords{ii}, cutoff, being_published);
   end
 
 end % function
@@ -39,6 +39,7 @@ function displayDataSummary_core(keyword, cutoff, being_published)
   % and named 'data-keyword*.mat'
 
   [dataTable, param_names, ~, total_models] = processData(keyword, cutoff);
+  keyboard
 
   % display summary statistics
   disp([ 'Models passing: ' num2str(height(dataTable)) '/' num2str(total_models) ])
