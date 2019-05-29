@@ -12,6 +12,12 @@ function [dataTable, param_names, x, total_models] = processData(keyword, cutoff
   %     e.g. 'comp1-passive' or 'comp2-transient'
   %   cutoff: only models with a cost less than the cutoff will be considered
   %     defaults to 10,000
+  % Outputs:
+  %   dataTable: a table containing the cost, costParts, parameters, and responses
+  %   param_names: a cell array of the names of the xolotl parameters optimized over
+  %   x: the xolotl object with default parameters
+  %   total_models: the original total number of models in the data set
+  %     before being pared down by the cutoff
 
   if nargin < 2
     cutoff = 1e4;

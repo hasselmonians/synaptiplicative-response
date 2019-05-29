@@ -1,18 +1,28 @@
-function displayDataSummary(keywords, cutoff, being_published)
+function [dataTable, param_names, x, total_models] = displayDataSummary(keywords, cutoff, being_published)
   % loads the data into a data table
   % displays summary statistics
   % plots responses in a line plot
   % finds an exemplar model
   % plots the response
   %
+  % [dataTable, param_names, x, total_models] = displayDataSummary('comp1-passive', 1e4, false)
+  %
   % Arguments:
-  %   keywords: an n x 1 or 1 x n cell array
+  %   keywords: an n x 1 or 1 x n cell array, or a character vector
   %     tells which data should be used, such as {'comp1-passive'}
   %     the '-' is important! Keywords should always have two parts separated by a '-'
-  %     runs iteratively if n > 1
-  %   cutoff: models with costs less than the cutoff will be excluded
+  %     runs iteratively and appends, if n > 1
+  %     if the keyword is just a character vector, the function is run once
+  %   cutoff: a 1x1 positive, real number
+  %     models with costs less than the cutoff will be excluded
   %   being_published: a 1x1 logical
   %     if being_published, snap and delete figures
+  % Outputs:
+  %   dataTable: a table containing the cost, costParts, parameters, and responses
+  %   param_names: a cell array of the names of the xolotl parameters optimized over
+  %   x: the xolotl object with default parameters
+  %   total_models: the original total number of models in the data set
+  %     before being pared down by the cutoff
 
   if nargin < 2
     cutoff = 1e4;
