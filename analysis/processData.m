@@ -1,18 +1,24 @@
-function [dataTable, param_names, x] = processData(keyword)
+function [dataTable, param_names, x] = processData(keyword, cutoff)
   % gathers data from .mat files produced by simulations
   % that match the pattern in `filekey`
   % and performs some filtering
   %
-  % Ex: processData('comp1-passive')
+  % Ex: processData('comp1-passive', 1e4)
   %
   % the data are expected to have cost, costParts, params, and responses as fields
-  % 
+  %
   % Arguments:
   %   filekey: character vector of one or two keywords separated by a dash '-'
   %     e.g. 'comp1-passive' or 'comp2-transient'
+  %   cutoff: only models with a cost less than the cutoff will be considered
+  %     defaults to 10,000
+
+  if nargin < 2
+    cutoff = 1e4;
+  end
 
   %% Gather the data into a table
-  
+
   filekey = fullfile(fileparts(mfilename('fullpath')), ['data-', keyword, '*.mat']);
   filekey = strrep(filekey, 'analysis', 'data');
   pkgkey  = split(keyword, '-');
@@ -41,10 +47,10 @@ function [dataTable, param_names, x] = processData(keyword)
   %% Eliminate "failing" parameter sets
 
   % failing is defined as having a cost >= 1e4
-  dataTable = dataTable(dataTable.cost < 1e4, :);
-  
+  dataTable = dataTable(dataTable.cost < cutoff, :);
+
   %% Instantiate the xolotl object
-  
+
   if nargout > 2
     x = eval([pkgkey{1} '.' pkgkey{2} '.model()']);
   end
