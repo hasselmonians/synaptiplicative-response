@@ -1,4 +1,4 @@
-function displayDataSummary(keywords, being_published)
+function displayDataSummary(keywords, cutoff, being_published)
   % loads the data into a data table
   % displays summary statistics
   % plots responses in a line plot
@@ -10,8 +10,17 @@ function displayDataSummary(keywords, being_published)
   %     tells which data should be used, such as {'comp1-passive'}
   %     the '-' is important! Keywords should always have two parts separated by a '-'
   %     runs iteratively if n > 1
+  %   cutoff: models with costs less than the cutoff will be excluded
   %   being_published: a 1x1 logical
   %     if being_published, snap and delete figures
+
+  if nargin < 2
+    cutoff = 1e4;
+  end
+
+  if nargin < 3
+    being_published = false;
+  end
 
   if ischar(keywords)
     keywords = {keywords};
@@ -23,16 +32,16 @@ function displayDataSummary(keywords, being_published)
 
 end % function
 
-function displayDataSummary_core(keyword, being_published)
+function displayDataSummary_core(keyword, cutoff, being_published)
 
   % load the data and grab the parameter names
   % data should be in /**/synaptiplicative-response/data/
   % and named 'data-keyword*.mat'
 
-  [dataTable, param_names] = processData(keyword);
+  [dataTable, param_names, ~, total_models] = processData(keyword);
 
   % display summary statistics
-  disp(['Models passing: ' num2str(height(dataTable)) '/1000'])
+  disp([ 'Models passing: ' num2str(height(dataTable)) '/' num2str(total_models) ])
   disp('Parameter Names:')
   disp(param_names)
   summary(dataTable)

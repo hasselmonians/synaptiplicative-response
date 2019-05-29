@@ -1,4 +1,4 @@
-function [dataTable, param_names, x] = processData(keyword, cutoff)
+function [dataTable, param_names, x, total_models] = processData(keyword, cutoff)
   % gathers data from .mat files produced by simulations
   % that match the pattern in `filekey`
   % and performs some filtering
@@ -16,6 +16,7 @@ function [dataTable, param_names, x] = processData(keyword, cutoff)
   if nargin < 2
     cutoff = 1e4;
   end
+
 
   %% Gather the data into a table
 
@@ -46,7 +47,10 @@ function [dataTable, param_names, x] = processData(keyword, cutoff)
 
   %% Eliminate "failing" parameter sets
 
-  % failing is defined as having a cost >= 1e4
+  % total number of models before pruning the dataset
+  total_models = height(dataTable);
+
+  % failing is defined as having a cost >= cutoff
   dataTable = dataTable(dataTable.cost < cutoff, :);
 
   %% Instantiate the xolotl object
