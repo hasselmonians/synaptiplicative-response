@@ -28,7 +28,7 @@ function displayDataSummary_core(keyword, being_published)
   % load the data and grab the parameter names
   % data should be in /**/synaptiplicative-response/data/
   % and named 'data-keyword*.mat'
-  
+
   [dataTable, param_names] = processData(keyword);
 
   % display summary statistics
