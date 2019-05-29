@@ -38,7 +38,7 @@ function displayDataSummary_core(keyword, cutoff, being_published)
   % data should be in /**/synaptiplicative-response/data/
   % and named 'data-keyword*.mat'
 
-  [dataTable, param_names, ~, total_models] = processData(keyword);
+  [dataTable, param_names, ~, total_models] = processData(keyword, cutoff);
 
   % display summary statistics
   disp([ 'Models passing: ' num2str(height(dataTable)) '/' num2str(total_models) ])
