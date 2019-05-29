@@ -48,11 +48,11 @@ function displayDataSummary_core(keyword, cutoff, being_published)
 
   % plot all responses in a line plot
   figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
-  plot(1000*dataTable.responses', '-ko', 'MarkerFaceColor', 'k')
+  plot(dataTable.responses', '-ko', 'MarkerFaceColor', 'k')
   xticks([1 2 3])
   xticklabels({'R_1', 'R_2', 'R_{1,2}'})
   xlabel('response conditions')
-  ylabel('response magnitude (\muV)')
+  ylabel('response magnitude (mV)')
   xlim([0 4])
   ylim(1000*[0, 1.1*max(dataTable.responses(:))])
   title([keyword ' responses'])
