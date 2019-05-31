@@ -20,7 +20,7 @@ function [cost, costParts, response, V] = simulate(x, ~, ~)
   pulseHeight_AMPA  = 60; % mV
   pulseStart_AMPA   = round(2 / x.dt); % time steps
   pulseStop_AMPA    = pulseStart_AMPA + pulseWidth_AMPA; % time steps
-  pulse_AMPA        = -70 * ones(length(V), 1);
+  pulse_AMPA        = -90 * ones(length(V), 1);
   pulse_AMPA(pulseStart_AMPA:pulseStop_AMPA) = pulseHeight_AMPA;
 
   % set up presynaptic NMDAergic waveform pulse
@@ -28,7 +28,7 @@ function [cost, costParts, response, V] = simulate(x, ~, ~)
   pulseHeight_NMDA  = 60;
   pulseStart_NMDA   = round(60 / x.dt);
   pulseStop_NMDA    = pulseStart_NMDA + pulseWidth_NMDA;
-  pulse_NMDA        = -70 * ones(length(V), 1);
+  pulse_NMDA        = -90 * ones(length(V), 1);
   pulse_NMDA(pulseStart_NMDA:pulseStop_NMDA) = pulseHeight_NMDA;
 
   [response(1), V(:,1)]   = comp1.simulate_core(x, comps, 1, pulse_AMPA, pulse_NMDA);
