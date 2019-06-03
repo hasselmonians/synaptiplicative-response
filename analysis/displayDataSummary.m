@@ -1,4 +1,4 @@
-function [dataTable, param_names, x, total_models] = displayDataSummary(keywords, cutoff, being_published)
+function [dataTable, param_names, x, total_models] = displayDataSummary(keywords, containing_folder, cutoff, being_published)
   % loads the data into a data table
   % displays summary statistics
   % plots responses in a line plot
@@ -13,6 +13,9 @@ function [dataTable, param_names, x, total_models] = displayDataSummary(keywords
   %     the '-' is important! Keywords should always have two parts separated by a '-'
   %     runs iteratively and appends, if n > 1
   %     if the keyword is just a character vector, the function is run once
+  %   containing_folder: character vector
+  %     specifies which folder inside of the /data/ folder we should look in
+  %     if nothing is specified, then searches for everything inside of /data/
   %   cutoff: a 1x1 positive, real number
   %     models with costs less than the cutoff will be excluded
   %   being_published: a 1x1 logical
@@ -25,10 +28,14 @@ function [dataTable, param_names, x, total_models] = displayDataSummary(keywords
   %     before being pared down by the cutoff
 
   if nargin < 2
-    cutoff = 1e4;
+    containing_folder = '**';
   end
 
   if nargin < 3
+    cutoff = 1e4;
+  end
+
+  if nargin < 4
     being_published = false;
   end
 
@@ -37,12 +44,12 @@ function [dataTable, param_names, x, total_models] = displayDataSummary(keywords
   end
 
   for ii = 1:length(keywords)
-    displayDataSummary_core(keywords{ii}, cutoff, being_published);
+    displayDataSummary_core(keywords{ii}, containing_folder, cutoff, being_published);
   end
 
 end % function
 
-function displayDataSummary_core(keyword, cutoff, being_published)
+function displayDataSummary_core(keyword, containing_folder, cutoff, being_published)
 
   % load the data and grab the parameter names
   % data should be in /**/synaptiplicative-response/data/
