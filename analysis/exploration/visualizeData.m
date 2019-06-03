@@ -109,7 +109,7 @@ delete(gcf)
 % 1000 simulations were performed.
 
 try
-  displayDataSummary('comp1-passive', 0.000001, true);
+  displayDataSummary('comp1-passive', 'experiment_double_pulse', 0.000001, true);
 catch
   disp('no data available')
 end
@@ -128,7 +128,7 @@ end
 % These are the top ten models by highest response #3.
 
 try
-  dataTable = processData('comp1-passive');
+  dataTable = processData('comp1-passive', 'experiment_double_pulse');
   [~, I] = sort(dataTable.responses(:,3));
   plotExemplars('comp1-passive', I(end-9:end));
 catch
@@ -137,7 +137,7 @@ end
 %% 1-compartment spiking case
 
 try
-  displayDataSummary('comp1-spiking', true);
+  displayDataSummary('comp1-spiking', 'experiment_double_pulse', true);
 catch
   disp('no data available')
 end
