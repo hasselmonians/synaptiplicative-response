@@ -35,7 +35,6 @@ function [dataTable, param_names, x, total_models] = processData(keyword, contai
 
   filekey = fullfile(fileparts(mfilename('fullpath')), ['data-', keyword, '*.mat']);
   filekey = strrep(filekey, 'analysis', ['data' filesep containing_folder]);
-  keyboard
   pkgkey  = split(keyword, '-');
 
   dirs = dir(filekey);
