@@ -2,9 +2,9 @@ function [r, V] = simulate_core(x, comps, trial, pulse_AMPA, pulse_NMDA)
 
   % save indices for later
   index = zeros(2, 1);
-  index(1) = strcmp(comps, 'Presynaptic1');
-  index(2) = strcmp(comps, 'Presynaptic2');
-  index(3) = strcmp(comps, 'Dendrite');
+  index(1) = find(strcmp(comps, 'Presynaptic1'));
+  index(2) = find(strcmp(comps, 'Presynaptic2'));
+  index(3) = find(strcmp(comps, 'Dendrite'));
 
   % reset to steady-state
   x.reset('steady-state');
