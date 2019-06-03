@@ -1,18 +1,18 @@
-function [r, V] = simulation_core(x, comps, trial, pulse_AMPA, pulse_NMDA)
-  
+function [r, V] = simulate_core(x, comps, trial, pulse_AMPA, pulse_NMDA)
+
   % save indices for later
   index = zeros(2, 1);
   index(1) = strcmp(comps, 'Presynaptic1');
   index(2) = strcmp(comps, 'Presynaptic2');
   index(3) = strcmp(comps, 'Dendrite');
-  
+
   % reset to steady-state
   x.reset('steady-state');
-  
+
   % set the voltage clamp in the correct presynaptic compartment
   V_clamp       = NaN(x.t_end / x.dt, length(comps));
-  
-  
+
+
   switch trial
   case 1
     % zap the first compartment (AMPAergic)
@@ -25,7 +25,7 @@ function [r, V] = simulation_core(x, comps, trial, pulse_AMPA, pulse_NMDA)
     V_clamp(:, index(1)) = pulse_AMPA;
     V_clamp(:, index(2)) = pulse_NMDA;
   end
-  
+
   % clamp the specified compartments
   x.V_clamp     = V_clamp;
   % perform the simulation
@@ -33,5 +33,5 @@ function [r, V] = simulation_core(x, comps, trial, pulse_AMPA, pulse_NMDA)
   % compute the EPSP amplitude
   V             = V(:, index(3));
   r             = responseHeight(V);
-  
+
 end % function
