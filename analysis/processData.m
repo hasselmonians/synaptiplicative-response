@@ -1,4 +1,4 @@
-function [dataTable, param_names, x, total_models] = processData(keyword, cutoff)
+function [dataTable, param_names, x, total_models] = processData(keyword, containing_folder, cutoff)
   % gathers data from .mat files produced by simulations
   % that match the pattern in `filekey`
   % and performs some filtering
@@ -10,6 +10,9 @@ function [dataTable, param_names, x, total_models] = processData(keyword, cutoff
   % Arguments:
   %   filekey: character vector of one or two keywords separated by a dash '-'
   %     e.g. 'comp1-passive' or 'comp2-transient'
+  %   containing_folder: character vector
+  %     specifies which folder inside of the /data/ folder we should look in
+  %     if nothing is specified, then searches for everything inside of /data/
   %   cutoff: only models with a cost less than the cutoff will be considered
   %     defaults to 10,000
   % Outputs:
@@ -20,6 +23,10 @@ function [dataTable, param_names, x, total_models] = processData(keyword, cutoff
   %     before being pared down by the cutoff
 
   if nargin < 2
+    containing_folder = '**';
+  end
+
+  if nargin < 3
     cutoff = 1e4;
   end
 
@@ -27,7 +34,8 @@ function [dataTable, param_names, x, total_models] = processData(keyword, cutoff
   %% Gather the data into a table
 
   filekey = fullfile(fileparts(mfilename('fullpath')), ['data-', keyword, '*.mat']);
-  filekey = strrep(filekey, 'analysis', 'data');
+  filekey = strrep(filekey, 'analysis', ['data' filesep containing_folder]);
+  keyboard
   pkgkey  = split(keyword, '-');
 
   dirs = dir(filekey);
