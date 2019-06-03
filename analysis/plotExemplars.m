@@ -1,8 +1,16 @@
-function plotExemplars(keyword, indices)
+function plotExemplars(keyword, containing_folder, indices)
 
   % plots the results of a double-pulse experiment
   % as response traces vs. time
   % can overlay an arbitrary number of responses
+
+  %   containing_folder: character vector
+  %     specifies which folder inside of the /data/ folder we should look in
+  %     if nothing is specified, then searches for everything inside of /data/
+
+  if nargin < 2
+    containing_folder = '**';
+  end
 
   %% Generate the figure to plot on
 
@@ -43,7 +51,7 @@ function plotExemplars(keyword, indices)
 
   %% Create the data table and xolotl object
 
-  [dataTable, param_names, x] = processData(keyword);
+  [dataTable, param_names, x] = processData(keyword, containing_folder);
   pkgkey = split(keyword, '-');
 
   % determine the correct indices
