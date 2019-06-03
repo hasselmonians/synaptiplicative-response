@@ -9,5 +9,6 @@ function x = setSteadyState(x, V_clamp)
   x.V_clamp = V_clamp;
   V = x.integrate;
   x.t_end = 100;
+  x.set('*V', -90);
   x.snapshot('steady-state');
 end % function
