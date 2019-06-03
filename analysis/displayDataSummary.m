@@ -35,6 +35,10 @@ function [dataTable, param_names, x, total_models] = displayDataSummary(keywords
     cutoff = 1e4;
   end
 
+  if isempty(cutoff)
+    cutoff = 1e4;
+  end
+
   if nargin < 4
     being_published = false;
   end
