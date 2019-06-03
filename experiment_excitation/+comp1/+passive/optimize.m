@@ -19,7 +19,7 @@ p.options.SwarmSize = 24;
 
 %% Initialize outputs
 
-nSims     = 1000;
+nSims     = 100;
 nEpochs   = 3;
 nParams   = length(p.parameter_names);
 params    = NaN(nSims, nParams);
