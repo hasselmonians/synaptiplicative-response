@@ -48,18 +48,18 @@ function [dataTable, param_names, x, total_models] = displayDataSummary(keywords
   end
 
   for ii = 1:length(keywords)
-    displayDataSummary_core(keywords{ii}, containing_folder, cutoff, being_published);
+    [dataTable, param_names, total_models] = displayDataSummary_core(keywords{ii}, containing_folder, cutoff, being_published);
   end
 
 end % function
 
-function displayDataSummary_core(keyword, containing_folder, cutoff, being_published)
+function [dataTable, param_names, total_models] = displayDataSummary_core(keyword, containing_folder, cutoff, being_published)
 
   % load the data and grab the parameter names
   % data should be in /**/synaptiplicative-response/data/
   % and named 'data-keyword*.mat'
 
-  [dataTable, param_names, ~, total_models] = processData(keyword, cutoff);
+  [dataTable, param_names, ~, total_models] = processData(keyword, containing_folder, cutoff);
 
   % display summary statistics
   disp([ 'Models passing: ' num2str(height(dataTable)) '/' num2str(total_models) ])
