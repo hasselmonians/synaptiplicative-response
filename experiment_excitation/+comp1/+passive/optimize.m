@@ -5,7 +5,7 @@ x.t_end = 100; % ms
 
 p = xfit('particleswarm');
 p.x = x;
-p.sim_func = @comp1.simulate();
+p.sim_func = @comp1.simulate;
 
 % parameters
 param_names = [x.find('Dendrite*gbar'); x.find('Dendrite*gmax')];
