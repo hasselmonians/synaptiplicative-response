@@ -3,6 +3,7 @@ function [cost, costParts, response, V] = simulate(x, ~, ~)
   %% Preamble
   % compute the steady-state
   % this has to be done here because the parameters change
+
   x = setSteadyState(x);
 
   % preallocate output variables
