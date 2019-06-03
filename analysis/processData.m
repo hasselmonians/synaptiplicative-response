@@ -3,7 +3,7 @@ function [dataTable, param_names, x, total_models] = processData(keyword, contai
   % that match the pattern in `filekey`
   % and performs some filtering
   %
-  % Ex: processData('comp1-passive', 1e4)
+  % Ex: processData('comp1-passive', 'experiment_double_pulse', 1e4)
   %
   % the data are expected to have cost, costParts, params, and responses as fields
   %
