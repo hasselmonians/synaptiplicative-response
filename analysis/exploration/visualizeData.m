@@ -118,7 +118,7 @@ end
 % These are the top ten models by lowest cost.
 
 try
-  plotExemplars('comp1-passive', 10);
+  plotExemplars('comp1-passive', 'experiment_double_pulse', 10);
   pdflib.snap
   delete(gcf)
 catch
@@ -137,7 +137,7 @@ end
 %% 1-compartment spiking case
 
 try
-  displayDataSummary('comp1-spiking', 'experiment_double_pulse', true);
+  displayDataSummary('comp1-spiking', 'experiment_double_pulse', [], true);
 catch
   disp('no data available')
 end
