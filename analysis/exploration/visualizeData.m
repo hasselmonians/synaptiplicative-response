@@ -109,7 +109,7 @@ delete(gcf)
 % 1000 simulations were performed.
 
 try
-  displayDataSummary('comp1-passive', 'experiment_double_pulse', 0.000001, true);
+  displayDataSummary('comp1-passive', 'experiment_double_pulse', [], true);
 catch
   disp('no data available')
 end
