@@ -30,6 +30,9 @@ function [dataTable, param_names, x, total_models] = processData(keyword, contai
     cutoff = 1e4;
   end
 
+  if isempty(cutoff)
+    cutoff = 1e4;
+  end
 
   %% Gather the data into a table
 
