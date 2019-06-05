@@ -130,7 +130,7 @@ end
 try
   dataTable = processData('comp1-passive', 'experiment_double_pulse');
   [~, I] = sort(dataTable.responses(:,3));
-  plotExemplars('comp1-passive', I(end-9:end));
+  plotExemplars('comp1-passive', 'experiment_double_pulse', I(end-9:end));
 catch
 end
 
@@ -163,7 +163,7 @@ end
 try
   dataTable = processData('comp1-passive', 'experiment_excitation');
   [~, I] = sort(dataTable.responses(:,3));
-  plotExemplars('comp1-passive', I(end-9:end));
+  plotExemplars('comp1-passive', 'experiment_excitation', I(end-9:end));
 catch
 end
 
