@@ -7,7 +7,7 @@ function x = model()
   x.add('compartment', 'Dendrite', 'Cm', 30, 'radius', 4e-3, 'len', 110e-3);
 
   % add only a leak current
-  x.Dendrite.add('Leak', 'gbar', 0.1, 'E', -70);
+  x.Dendrite.add('Leak', 'gbar', 0.1, 'E', -90);
 
   %% Add presynaptic compartments
 
