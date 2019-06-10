@@ -8,26 +8,30 @@
 % The model has 4 parameters, corresponding to the four maximal condutances.
 % Two of the conductances, the maximal condutances of the NMDAergic synapses will be varied.
 
-x = model();
+if exist('experiment_brute_force/responses.mat')
+  corelib.verb(true, 'INFO', 'loading responses.mat')
+else
+  x = model();
 
-% equidistant grid for synaptic maximal conductances
-gmax = 0:0.1:30;
+  % equidistant grid for synaptic maximal conductances
+  gmax = 0:0.1:30;
 
-% responses stored in a gmax x gmax x 3 array
-responses = zeros(length(gmax), length(gmax), 3);
+  % responses stored in a gmax x gmax x 3 array
+  responses = zeros(length(gmax), length(gmax), 3);
 
-% parameter names
-param_names = x.find('Dendrite*NMDAergic*gmax');
+  % parameter names
+  param_names = x.find('Dendrite*NMDAergic*gmax');
 
-% container for parameter values
-param_values = zeros(2, 1);
+  % container for parameter values
+  param_values = zeros(2, 1);
 
-for ii = 1:length(gmax)
-  corelib.textbar(ii, length(gmax))
-  for qq = 1:length(gmax)
-    param_values = [gmax(ii); gmax(qq)];
-    x.set(param_names, param_values);
-    responses(ii, qq, :) = simulate(x);
+  for ii = 1:length(gmax)
+    corelib.textbar(ii, length(gmax))
+    for qq = 1:length(gmax)
+      param_values = [gmax(ii); gmax(qq)];
+      x.set(param_names, param_values);
+      responses(ii, qq, :) = simulate(x);
+    end
   end
 end
 
