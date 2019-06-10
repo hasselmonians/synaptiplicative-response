@@ -16,7 +16,7 @@ function [cost, costParts] = costFunction(R, epsilon, lambda, bounds)
     end
 
     if isempty(epsilon)
-        epsilon = 0.01; % mV
+        epsilon = 1; % mV
     end
 
     if isempty(lambda)
