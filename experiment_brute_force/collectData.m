@@ -14,9 +14,6 @@ else
   corelib.verb(true, 'INFO', 'beginning simulations')
   parpool;
 
-  % responses stored in a gmax x gmax x 3 array
-  responses = zeros(length(gmax), length(gmax), 3);
-
   % set up an xgrid object
   p = xgrid();
   p.x = model();
