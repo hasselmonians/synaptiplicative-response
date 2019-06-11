@@ -68,8 +68,6 @@ return
     responses(xx, yy) = responses_unsorted(ii);
   end
 
-end
-
 x.set(param_names, param_values);
 responses(ii, qq, :) = simulate(x);
 %% Responses as a function of synaptic weights
