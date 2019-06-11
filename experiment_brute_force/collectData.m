@@ -11,30 +11,67 @@
 if exist('experiment_brute_force/responses.mat')
   corelib.verb(true, 'INFO', 'loading responses.mat')
 else
-  x = model();
-
-  % equidistant grid for synaptic maximal conductances
-  gmax = 0:0.1:30;
+  corelib.verb(true, 'INFO', 'beginning simulations')
+  parpool;
 
   % responses stored in a gmax x gmax x 3 array
   responses = zeros(length(gmax), length(gmax), 3);
+
+  % set up an xgrid object
+  p = xgrid();
+  p.x = model();
+  p.cleanup;
+
+  % equidistant grid for synaptic maximal conductances
+  gmax = 0:0.1:60;
 
   % parameter names
   param_names = x.find('Dendrite*NMDAergic*gmax');
 
   % container for parameter values
-  param_values = zeros(2, 1);
+  all_params = NaN(2, length(gmax) * length(gmax));
+  c = 1;
 
   for ii = 1:length(gmax)
-    corelib.textbar(ii, length(gmax))
     for qq = 1:length(gmax)
-      param_values = [gmax(ii); gmax(qq)];
-      x.set(param_names, param_values);
-      responses(ii, qq, :) = simulate(x);
+      all_params(1, c) = gmax(ii);
+      all_params(2, c) = gmax(qq);
+      c = c + 1;
     end
   end
+
+  % set up the xgrid object parameter matrix
+  p.batchify(all_params, param_names);
+
+  % set up the function to run
+  p.sim_func = @simulate;
+
+  % perform the simulation
+  p.simulate;
+  wait(p.workers);
+
+  % gather the data into an unsorted matrix
+  [all_data, all_params, all_params_idx] = p.gather;
+  responses_unsorted = all_data{1};
+
+  save('responses_raw.mat', 'all_data', 'all_params', 'all_params_idx');
+
 end
 
+return
+
+  % sort the responses to create a
+  responses = zeros(length(gmax), length(gmax), 3);
+  for ii = 1:length(all_params)
+    xx = find(all_params(1, ii) == gmax);
+    yy = find(all_params(2, ii) == gmax);
+    responses(xx, yy) = responses_unsorted(ii);
+  end
+
+end
+
+x.set(param_names, param_values);
+responses(ii, qq, :) = simulate(x);
 %% Responses as a function of synaptic weights
 
 figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
