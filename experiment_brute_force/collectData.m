@@ -12,7 +12,11 @@ if exist('experiment_brute_force/responses.mat')
   corelib.verb(true, 'INFO', 'loading responses.mat')
 else
   corelib.verb(true, 'INFO', 'beginning simulations')
-  parpool;
+
+  % create a parallel pool if there isn't one, using the local settings
+  if isempty(gcp('nocreate'))
+    parpool
+  end
 
   % set up an xgrid object
   p = xgrid();
@@ -22,7 +26,7 @@ else
   % equidistant grid for synaptic maximal conductances
   gmax = 0:0.1:60;
 
-  % parameter names
+  % parameter names (the maximal synaptic conductances)
   param_names = x.find('Dendrite*NMDAergic*gmax');
 
   % container for parameter values
@@ -55,6 +59,7 @@ else
 
 end
 
+% TODO: stop here and check to see what the results are, then figure out how to sort them
 return
 
   % sort the responses to create a
