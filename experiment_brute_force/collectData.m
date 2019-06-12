@@ -55,7 +55,7 @@ else
   % gather the data into an unsorted matrix
   [all_data, all_params, all_params_idx] = p.gather;
 
-  save('responses.mat', 'all_data', 'all_params');
+  save('responses.mat', 'all_data', 'all_params', 'gmax', 'x');
 end
 
 %% Gather the responses
@@ -95,5 +95,3 @@ ylabel('g_{max} (\mu S)')
 title('additive difference')
 c = colorbar;
 c.Label.String = 'Response height (mV)';
-
-save('responses.mat', 'responses', 'param_names', 'param_values', 'x', 'gmax');
