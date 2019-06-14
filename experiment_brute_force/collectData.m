@@ -47,6 +47,7 @@ else
 
   % set up the function to run
   p.sim_func = @simulate;
+  p.n_outputs = 1;
 
   % perform the simulation
   p.simulate;
