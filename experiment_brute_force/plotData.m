@@ -53,9 +53,17 @@ title('additive difference')
 c = colorbar;
 c.Label.String = 'Response height (mV)';
 
+figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
+imagesc(gmax, gmax, responses(:, :, 3) ./ (responses(:, : ,1) + responses(:, : ,2)));
+xlabel('g_{max} (\mu S)')
+ylabel('g_{max} (\mu S)')
+title('nonlinearity factor')
+c = colorbar;
+c.Label.String = 'Response height (mV)';
+
 %% Plot selected time series
 
-params = [28 5; 28 15; 28 28];
+params = [28 5; 28 15; 28 28; 40 40; 50 50; 60 60];
 
 for ii = 1:size(params, 1)
   x.set(param_names, params(ii, :))
