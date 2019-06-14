@@ -70,29 +70,3 @@ for ii = 1:length(all_params)
   yy = find(all_params(2, ii) == gmax);
   responses(xx, yy, :) = responses_unsorted(:, ii);
 end
-
-%% Responses as a function of synaptic weights
-
-figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
-imagesc(gmax, gmax, responses(:, :, 3));
-xlabel('g_{max} (\mu S)')
-ylabel('g_{max} (\mu S)')
-title('responses')
-c = colorbar;
-c.Label.String = 'Response height (mV)';
-
-figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
-imagesc(gmax, gmax, responses(:, :, 3) - responses(:, :, 1) .* responses(:, :, 2));
-xlabel('g_{max} (\mu S)')
-ylabel('g_{max} (\mu S)')
-title('multiplicative difference')
-c = colorbar;
-c.Label.String = 'Response height (mV)';
-
-figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
-imagesc(gmax, gmax, responses(:, :, 3) - responses(:, :, 1) - responses(:, :, 2));
-xlabel('g_{max} (\mu S)')
-ylabel('g_{max} (\mu S)')
-title('additive difference')
-c = colorbar;
-c.Label.String = 'Response height (mV)';
