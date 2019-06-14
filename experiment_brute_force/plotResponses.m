@@ -23,8 +23,9 @@ function plotResponses(x)
 
   % plot the three responses
   VV = corelib.vectorise(V);
-  a = min(VV) - 0.1 * abs(max(VV) - min(VV));
-  b = max(VV) + 0.1 * abs(max(VV) - min(VV));
+  margin = 0.1 * abs(max(VV) - min(VV));
+  a = min(VV) - margin;
+  b = max(VV) + margin;
   for ii = 1:3
     plot(ax(ii), time, V(:, ii), 'k')
     ylabel(ax(ii), ['R_' num2str(ii) ' (mV)'])
@@ -34,6 +35,9 @@ function plotResponses(x)
   % plot the waveform pulse
   plot(ax(4), time, pulse, 'k');
   ylabel(ax(4), 'pulse (mV)')
+  pp = corelib.vectorise(pulse);
+  margin = 0.1 * abs(max(pp) - min(pp));
+  ylim(ax(4), [min(pp) - margin, max(pp) + margin])
 
   % add the axis labels
   xlabel(ax(4), 'time (ms)')
