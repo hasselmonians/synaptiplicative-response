@@ -15,35 +15,31 @@ function plotResponses(x)
   % don't bother generating multiple plots on one figure
   f = figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
 
-  for ii = 4:-1:1
-    ax(ii) = subplot(4, 1, ii);
+  for ii = 3:-1:1
+    ax(ii) = subplot(3, 1, ii); hold on
   end
 
   time = x.dt * (1:length(pulse));
+  C = colormaps.linspecer(3);
 
   % plot the three responses
-  VV = corelib.vectorise(V);
-  margin = 0.1 * abs(max(VV) - min(VV));
-  a = min(VV) - margin;
-  b = max(VV) + margin;
   for ii = 1:3
-    plot(ax(ii), time, V(:, ii), 'k')
-    ylabel(ax(ii), ['R_' num2str(ii) ' (mV)'])
-    ylim(ax(ii), [a b]);
+    plot(ax(1), time, V(:, ii), 'Color', C(ii, :))
   end
 
   % plot the waveform pulse
-  plot(ax(4), time, pulse, 'k');
-  ylabel(ax(4), 'pulse (mV)')
-  pp = corelib.vectorise(pulse);
-  margin = 0.1 * abs(max(pp) - min(pp));
-  ylim(ax(4), [min(pp) - margin, max(pp) + margin])
+  plot(ax(2), time, pulse, 'k');
+
+  % plot the NMDAergic current trace
+  for ii = 1:2
+    plot(ax(3), time, Isyn(:, ii), 'Color', C(ii+1, :));
+  end
 
   % add the axis labels
-  xlabel(ax(4), 'time (ms)')
+  ylabel(ax(1), 'responses (mV)')
+  ylabel(ax(2), 'pulse (mV)')
+  ylabel(ax(3), 'current (nA)')
+  xlabel(ax(3), 'time (ms)')
 
   % make the figure pretty
-  figlib.pretty()
-
-  % link the axes for the first three plots
-  linkaxes(ax(1:3), 'xy')
+  figlib.pretty('plot_buffer', 0.2)
