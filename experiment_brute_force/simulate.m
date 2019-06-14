@@ -1,4 +1,4 @@
-function [responses, V] = simulate(x)
+function [responses, V, pulse] = simulate(x)
   % this function is used to simulate the voltage response amplitude
   % of two pulses, and then both together, to check for supralinearity
 
