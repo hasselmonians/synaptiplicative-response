@@ -8,7 +8,7 @@ function plotResponses(x)
   %     expects one ready to go into the simulate function
 
   % perform the computation and save the three responses and the pulse waveform
-  [~, V, pulse] = simulate(x);
+  [~, V, pulse, Isyn] = simulate(x);
 
   %% Generate the figure to plot on
 
@@ -23,8 +23,10 @@ function plotResponses(x)
   C = colormaps.linspecer(3);
 
   % plot the three responses
+  leg = cell(3,1);
   for ii = 1:3
     plot(ax(1), time, V(:, ii), 'Color', C(ii, :))
+    leg{ii} = ['R_' num2str(ii)];
   end
 
   % plot the waveform pulse
@@ -40,6 +42,9 @@ function plotResponses(x)
   ylabel(ax(2), 'pulse (mV)')
   ylabel(ax(3), 'current (nA)')
   xlabel(ax(3), 'time (ms)')
+
+  % add the legend
+  legend(ax(1), leg);
 
   % make the figure pretty
   figlib.pretty('plot_buffer', 0.2)

@@ -1,7 +1,7 @@
 %% Load the data
 
 % we expect all_data, all_params, gmax, param_names, and x to be contained within
-load('responses_60.mat')
+load('responses.mat')
 
 % if not, laod some defaults
 
