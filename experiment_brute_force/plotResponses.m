@@ -43,6 +43,9 @@ function plotResponses(x)
   % ylabel(ax(3), 'current (nA)')
   xlabel(ax(2), 'time (ms)')
 
+  % fix axis limits
+  ylabel(ax(1), [-95, -65])
+
   % add the legend
   legend(ax(1), leg);
 
