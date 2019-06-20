@@ -3,7 +3,7 @@
 % we expect all_data, all_params, gmax, param_names, and x to be contained within
 load('responses.mat')
 
-% if not, laod some defaults
+% if not, load some defaults
 
 if ~exist('param_names', 'var')
   param_names = x.find('Dendrite*NMDAergic*gmax');
