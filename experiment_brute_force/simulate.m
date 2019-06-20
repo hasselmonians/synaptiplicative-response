@@ -1,4 +1,4 @@
-function [responses, V, pulse, Isyn] = simulate(x)
+function [responses, V, pulse] = simulate(x)
   % this function is used to simulate the voltage response amplitude
   % of two pulses, and then both together, to check for supralinearity
 
@@ -16,7 +16,7 @@ function [responses, V, pulse, Isyn] = simulate(x)
   % preallocate output variables
   responses = zeros(3,1);
   V         = zeros(x.t_end / x.dt, 3);
-  Isyn      = zeros(x.t_end / x.dt, 2);
+  % Isyn      = zeros(x.t_end / x.dt, 2);
 
   % useful variables
   comps     = x.find('compartment');
@@ -67,6 +67,6 @@ function [response, V] = simulate_core(x, comps, index, pulse)
 
   % organize the current trace
   % indices 3 and 6 represent the actual current in nanoamps
-  Isyn = Isyn_raw(:, [3, 6]);
+  % Isyn = Isyn_raw(:, [3, 6]);
 
 end % function
