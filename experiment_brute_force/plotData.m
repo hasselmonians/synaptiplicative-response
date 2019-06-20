@@ -36,6 +36,7 @@ ylabel('g_{max} (\mu S)')
 title('responses')
 c = colorbar;
 c.Label.String = 'Response height (mV)';
+figlib.pretty()
 
 figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
 imagesc(gmax, gmax, responses(:, :, 3) - responses(:, :, 1) .* responses(:, :, 2));
@@ -44,6 +45,7 @@ ylabel('g_{max} (\mu S)')
 title('multiplicative difference')
 c = colorbar;
 c.Label.String = 'Response height (mV)';
+figlib.pretty()
 
 figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
 imagesc(gmax, gmax, responses(:, :, 3) - responses(:, :, 1) - responses(:, :, 2));
@@ -52,6 +54,7 @@ ylabel('g_{max} (\mu S)')
 title('additive difference')
 c = colorbar;
 c.Label.String = 'Response height (mV)';
+figlib.pretty()
 
 figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
 imagesc(gmax, gmax, responses(:, :, 3) ./ (responses(:, : ,1) + responses(:, : ,2)));
@@ -60,6 +63,22 @@ ylabel('g_{max} (\mu S)')
 title('nonlinearity factor')
 c = colorbar;
 c.Label.String = 'Response height (mV)';
+figlib.pretty()
+
+%% Responses along the diagonal
+
+responses_diag = zeros(length(gmax), 3);
+for ii = 1:length(gmax)
+  responses_diag(ii, :) = responses(ii, ii, :);
+end
+
+figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
+plot(gmax, responses_diag(:, 1), 'k')
+plot(gmax, responses_diag(:, 3), 'r')
+legend({'R_1', 'R_3'}, 'Location', 'EastOutside')
+xlabel('g_{max} (\mu S)')
+ylabel('response (mV)')
+figlib.pretty()
 
 %% Plot selected time series
 
