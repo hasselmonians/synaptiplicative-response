@@ -50,4 +50,4 @@ function plotResponses(x)
   legend(ax(1), leg);
 
   % make the figure pretty
-  figlib.pretty('plot_buffer', 0.2)
+  figlib.pretty('PlotBuffer', 0.2)
