@@ -36,6 +36,7 @@ function plotResponses(x, delay, V, pulse)
   for ii = 1:3
     plot(ax(1), time, V(:, ii), 'Color', C(ii, :))
     leg{ii} = ['V_' num2str(ii)];
+    title(['delay = ' num2str(delay(ii)) ' ms'])
   end
 
   % plot the waveform pulse
