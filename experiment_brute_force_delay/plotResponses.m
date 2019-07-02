@@ -1,4 +1,3 @@
-function plotResponses(x, delay)
 function plotResponses(x, delay, V, pulse)
 
   % plots the responses to the three pulse conditions
@@ -41,7 +40,7 @@ function plotResponses(x, delay, V, pulse)
 
   % plot the waveform pulse
   plot(ax(2), time, pulse(:,1), 'k');
-  plot(ax(2), time, pulse(:,1), 'r');
+  plot(ax(2), time, pulse(:,2), 'r');
 
   % plot the NMDAergic current trace
   % for ii = 1:2
