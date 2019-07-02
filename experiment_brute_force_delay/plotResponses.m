@@ -1,4 +1,5 @@
 function plotResponses(x, delay)
+function plotResponses(x, delay, V, pulse)
 
   % plots the responses to the three pulse conditions
   % as response traces vs. time
@@ -6,9 +7,18 @@ function plotResponses(x, delay)
   % Arguments:
   %   x: xolotl object that is already set up
   %     expects one ready to go into the simulate function
+  %   delay: the delay between the two pulses in ms
+  %   V: the n x 3 membrane potential matrix
+  %   pulse: the n x 2 voltage pulse matrix
 
-  % perform the computation and save the three responses and the pulse waveform
-  [~, V, pulse] = simulate(x, delay);
+  % If V and pulse are given, don't perform additional computation
+  if nargin > 2
+    % assume that V and the pulse are given
+    % don't perform any additional computation
+  else
+    % perform the computation and save the three responses and the pulse waveform
+    [~, V, pulse] = simulate(x, delay);
+  end
 
   %% Generate the figure to plot on
 
