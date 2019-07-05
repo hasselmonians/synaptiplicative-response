@@ -32,16 +32,10 @@ function plotDelay(x)
   %% Plot the response height as a function of delay
   f = figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
 
-  for ii = 2:-1:1
-    ax(ii) = subplot(1, 2, ii);
-  end
+  plot(delay, responses / responses(1), 'ok')
 
-  semilogy(ax(1), delay, responses, 'ok');
-  loglog(ax(2), delay, responses, 'ok');
-
-  xlabel(ax(1), 'delay (ms)')
-  xlabel(ax(2), 'log delay')
-  ylabel(ax(1), 'response height (mV)')
+  xlabel('delay (ms)')
+  ylabel('response height (mV)')
   title('response height as function of delay')
 
   figlib.pretty('PlotBuffer', 0.2);
