@@ -38,7 +38,7 @@ function [responses, delay] = plotDelay(x, do_not_plot)
     end
   end
 
-  if do_not_plot = true
+  if do_not_plot == true
     return
   end
 
