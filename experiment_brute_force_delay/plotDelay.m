@@ -11,7 +11,7 @@
 % Outputs:
 %   f: a figure of the response height as a function of delay
 
-function f = plotDelay(x, do_not_plot)
+function [responses, delay] = plotDelay(x, do_not_plot)
 
   if nargin < 2
     do_not_plot = false;
