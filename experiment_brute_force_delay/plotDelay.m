@@ -34,8 +34,8 @@ for ii = 2:-1:1
   ax(ii) = subplot(1, 2, ii);
 end
 
-plot(ax(1), delay, responses, 'ok');
-semilogx(ax(2), delay, responses, 'ok');
+semilogy(ax(1), delay, responses, 'ok');
+loglog(ax(2), delay, responses, 'ok');
 
 xlabel(ax(1), 'delay (ms)')
 xlabel(ax(2), 'log delay')
