@@ -6,10 +6,16 @@
 
 % Arguments:
 %   x: a xolotl object with three compartments that satisfies simulate()
+%   skip_missing: a logical flag, defaults to false
+%     if skip_missing == true, the response traces will not be plotted
 % Outputs:
-%   produces a ton of plots, but no actual outputs
+%   f: a figure of the response height as a function of delay
 
-function plotDelay(x)
+function f = plotDelay(x, skip_responses)
+
+  if nargin < 2
+    skip_responses = false;
+  end
 
   % create a vector of delays to test (in ms)
   delay = logspace(0, log10(300), 11);
@@ -24,9 +30,12 @@ function plotDelay(x)
   for ii = 1:length(delay)
     % compute the response and pulse
     [rr, V, pulse] = simulate(x, delay(ii));
+    % extract the maximum of the EPSP
     responses(ii) = rr(3);
-    % plot the response vs. time traces
-    plotResponses(x, delay(ii), V, pulse);
+    if skip_responses == false
+      % plot the response vs. time traces
+      plotResponses(x, delay(ii), V, pulse);
+    end
   end
 
   %% Plot the response height as a function of delay
