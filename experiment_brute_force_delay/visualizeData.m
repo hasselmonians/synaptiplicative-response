@@ -11,12 +11,14 @@ leg = cell(length(gmaxes), 1);
 % generate the model
 x = model();
 
+% compute the responses with a delay, do not plot
 for ii = 1:length(gmaxes)
   corelib.textbar(ii, length(gmaxes))
   x.set('*gmax', gmaxes(ii));
   [responses{ii}, delay] = plotDelay(x, true);
 end
 
+% plot the responses and normalized responses as circles
 f = figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
 c = colormaps.linspecer(length(gmaxes));
 
