@@ -72,10 +72,17 @@ for ii = 1:length(gmax)
   responses_diag(ii, :) = responses(ii, ii, :);
 end
 
+% set up a colormap for the next figure
+C = colormaps.linspecer(4);
+
+% plot R_1, R_1 + R_2, R_1 * R_2, and R_3 together on one figure
+% as a function of the maximal conductance
 figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
-plot(gmax, responses_diag(:, 1), 'k')
-plot(gmax, responses_diag(:, 3), 'r')
-legend({'R_1', 'R_3'}, 'Location', 'EastOutside')
+plot(gmax, responses_diag(:, 1), 'Color', C(1, :))
+plot(gmax, responses_diag(:, 1) + responses_diag(:, 2), 'Color', C(2, :))
+plot(gmax, responses_diag(:, 1) .* responses_diag(:, 2), 'Color', C(3, :))
+plot(gmax, responses_diag(:, 3), 'Color', C(4, :))
+legend({'R_1', 'R_1 + R_2', 'R_1 * R_2', 'R_3',}, 'Location', 'EastOutside')
 xlabel('g_{max} (\mu S)')
 ylabel('response (mV)')
 figlib.pretty()
