@@ -6,12 +6,15 @@
 
 % Arguments:
 %   x: a xolotl object with three compartments that satisfies simulate()
+%   threshold: a numerical scalar
 %   do_not_plot: a logical flag, defaults to false
 %     if do_not_plot == true, no figures will be plotted
 % Outputs:
-%   f: a figure of the response height as a function of delay
+%   responses: maxima of the 3rd EPSP (the combined condition) as a function of delay
+%   delay: the vector of delays tested
+%   crossings: time when EPSP waveform crosses threshold (in ms)
 
-function [responses, delay] = plotDelay(x, do_not_plot)
+function [responses, delay, crossings] = plotDelay(x, threshold, do_not_plot)
 
   if nargin < 2
     do_not_plot = false;
@@ -26,12 +29,15 @@ function [responses, delay] = plotDelay(x, do_not_plot)
 
   % output vectors
   responses = zeros(length(delay), 1);
+  crossings = zeros(length(delay), 1);
 
   for ii = 1:length(delay)
     % compute the response and pulse
     [rr, V, pulse] = simulate(x, delay(ii));
     % extract the maximum of the EPSP
-    responses(ii) = rr(3);
+    responses(ii) = rr(3); % mV
+    % extract the crossing without accounting for delay
+    crossings(ii) = thresholdCrossings(V(:, 3), threshold, 'first'); % time-steps
     if do_not_plot == false
       % plot the response vs. time traces
       plotResponses(x, delay(ii), V, pulse);
