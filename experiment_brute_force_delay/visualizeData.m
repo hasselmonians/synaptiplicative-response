@@ -50,7 +50,7 @@ figlib.pretty('PlotBuffer', 0.2)
 %% Plot the threshold crossing times as a function of presynaptic strength
 
 % generate model
-% x = model();
+x = model();
 % set the leak current reversal potential to -70 mV
 x.set('*Leak.E', -70);
 % set the synaptic strength of the second presynaptic compartment to 30 μS
@@ -76,3 +76,13 @@ end
 % scale the crossings and pulse delays to milliseconds
 crossings   = x.dt * crossings; % ms
 pulseDelays = x.dt * pulseDelays; % ms
+
+% plot crossings measuered from end of first pulse as a function of synaptic strength
+f = figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
+
+plot(gmaxes, crossings - pulseDelays(:,1), 'ok');
+
+xlabel('synaptic strength (\muS/mm^2)')
+ylabel('threshold crossing time (ms)')
+
+figlib.pretty('PlotBuffer', 0.2)
