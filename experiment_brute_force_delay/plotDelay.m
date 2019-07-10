@@ -25,8 +25,12 @@ function [responses, delays, crossings, pulseDelays] = plotDelay(x, threshold, d
   end
 
   % create a vector of delays to test (in ms)
-  if ~exist('delays', 'var')
+  if ~exist('delays', 'var') || isempty(threshold)
     delays = logspace(0, log10(300), 11);
+  end
+
+  if ~exist('threshold', 'var') || isempty(threshold)
+    threshold = 0;
   end
 
   %% Perform the main loop
@@ -46,7 +50,13 @@ function [responses, delays, crossings, pulseDelays] = plotDelay(x, threshold, d
     responses(ii) = rr(3); % mV
 
     % extract the crossing without accounting for delays from the presynaptic pulses
-    crossings(ii) = veclib.thresholdCrossings(V(:, 3), threshold, 1); % time-steps
+    % if there are no crossings, replace with NaN
+    this_crossing = veclib.thresholdCrossings(V(:, 3), threshold, 1); % time-steps
+    if isempty(this_crossing)
+      crossings(ii) = NaN;
+    else
+      crossings(ii) = this_crossing;
+    end
 
     % extract the delays from the pulse waveform
     pulseDelays(ii, 1) = find(diff(pulse(:, 1)) ~= 0, 1, 'last') + 1;
