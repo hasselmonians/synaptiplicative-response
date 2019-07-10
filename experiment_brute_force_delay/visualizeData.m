@@ -15,7 +15,7 @@ x = model();
 for ii = 1:length(gmaxes)
   corelib.textbar(ii, length(gmaxes))
   x.set('*gmax', gmaxes(ii));
-  [responses{ii}, delay] = plotDelay(x, true);
+  [responses{ii}, delay] = plotDelay(x, [], [], true);
 end
 
 %% Plot the responses and normalized responses as circles
