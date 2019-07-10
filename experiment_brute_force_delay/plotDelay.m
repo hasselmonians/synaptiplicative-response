@@ -7,12 +7,16 @@
 % Arguments:
 %   x: a xolotl object with three compartments that satisfies simulate()
 %   threshold: a numerical scalar
+%   delays: the vector of delays to be tested, defaults to an 11x1 log-spaced vector on [0, 300] ms
 %   do_not_plot: a logical flag, defaults to false
 %     if do_not_plot == true, no figures will be plotted
 % Outputs:
 %   responses: maxima of the 3rd EPSP (the combined condition) as a function of delay
-%   delay: the vector of delays tested
+%   delays: the vector of delays tested
 %   crossings: time when EPSP waveform crosses threshold (in ms)
+%   pulseDelays: n x 2 matrix where n is the length of delays
+%     first column is the delay caused by presynaptic pulse #1
+%     second column is the delay caused by presynaptic pulse #2
 
 function [responses, delay, crossings] = plotDelay(x, threshold, do_not_plot)
 
