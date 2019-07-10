@@ -55,7 +55,9 @@ function plotResponses(x, delay, V, pulse)
   xlabel(ax(2), 'time (ms)')
 
   % fix axis limits
-  ylim(ax(1), [-95, -65])
+  lower_bound = min(x.get('*E')) - 5;
+  upper_bound = lower_bound + 20;
+  ylim(ax(1), [lower_bound, upper_bound])
 
   % add the legend
   legend(ax(1), leg);

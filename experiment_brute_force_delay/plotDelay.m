@@ -37,6 +37,11 @@ function [responses, delays, crossings, pulseDelays] = plotDelay(x, threshold, d
   % plot the responses vs. time traces
   % and the pulses
 
+  % clamp to the leak reversal potential
+  % while setting up the steady-state condition
+  E_Leak = x.Dendrite.Leak.E;
+  V_clamp = [NaN, E_Leak, E_Leak];
+
   % output vectors
   responses   = zeros(length(delays), 1);
   crossings   = zeros(length(delays), 1);
@@ -44,7 +49,7 @@ function [responses, delays, crossings, pulseDelays] = plotDelay(x, threshold, d
 
   for ii = 1:length(delays)
     % compute the response and pulse
-    [rr, V, pulse] = simulate(x, delays(ii));
+    [rr, V, pulse] = simulate(x, delays(ii), V_clamp);
 
     % extract the maximum of the EPSP
     responses(ii) = rr(3); % mV
