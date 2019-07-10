@@ -18,35 +18,37 @@
 %     first column is the delay caused by presynaptic pulse #1
 %     second column is the delay caused by presynaptic pulse #2
 
-function [responses, delay, crossings] = plotDelay(x, threshold, do_not_plot)
+function [responses, delays, crossings, pulseDelays] = plotDelay(x, threshold, delays, do_not_plot)
 
   if nargin < 2
     do_not_plot = false;
   end
 
   % create a vector of delays to test (in ms)
-  delay = logspace(0, log10(300), 11);
+  if ~exist('delays', 'var')
+    delays = logspace(0, log10(300), 11);
+  end
 
   %% Perform the main loop
   % plot the responses vs. time traces
   % and the pulses
 
   % output vectors
-  responses = zeros(length(delay), 1);
-  crossings = zeros(length(delay), 1);
+  responses   = zeros(length(delays), 1);
+  crossings   = zeros(length(delays), 1);
 
-  for ii = 1:length(delay)
+  for ii = 1:length(delays)
     % compute the response and pulse
-    [rr, V, pulse] = simulate(x, delay(ii));
+    [rr, V, pulse] = simulate(x, delays(ii));
     % extract the maximum of the EPSP
     responses(ii) = rr(3); % mV
     % extract the crossing without accounting for delay
     crossings(ii) = thresholdCrossings(V(:, 3), threshold, 'first'); % time-steps
     if do_not_plot == false
       % plot the response vs. time traces
-      plotResponses(x, delay(ii), V, pulse);
-    end
-  end
+      plotResponses(x, delays(ii), V, pulse);
+    end % do_not_plot
+  end % ii
 
   if do_not_plot == true
     return
@@ -54,8 +56,8 @@ function [responses, delay, crossings] = plotDelay(x, threshold, do_not_plot)
 
   %% Plot the response height as a function of delay
   f = figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
+    plot(delays, responses / responses(1), 'ok')
 
-  plot(delay, responses / responses(1), 'ok')
 
   xlabel('delay (ms)')
   ylabel('response height (mV)')
