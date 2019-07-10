@@ -36,14 +36,22 @@ function [responses, delays, crossings, pulseDelays] = plotDelay(x, threshold, d
   % output vectors
   responses   = zeros(length(delays), 1);
   crossings   = zeros(length(delays), 1);
+  pulseDelays = zeros(length(delays), 2);
 
   for ii = 1:length(delays)
     % compute the response and pulse
     [rr, V, pulse] = simulate(x, delays(ii));
+
     % extract the maximum of the EPSP
     responses(ii) = rr(3); % mV
-    % extract the crossing without accounting for delay
-    crossings(ii) = thresholdCrossings(V(:, 3), threshold, 'first'); % time-steps
+
+    % extract the crossing without accounting for delays from the presynaptic pulses
+    crossings(ii) = veclib.thresholdCrossings(V(:, 3), threshold, 1); % time-steps
+
+    % extract the delays from the pulse waveform
+    pulseDelays(ii, 1) = find(diff(pulse(:, 1)) ~= 0, 1, 'last') + 1;
+    pulseDelays(ii, 2) = find(diff(pulse(:, 2)) ~= 0, 1, 'last') + 1;
+
     if do_not_plot == false
       % plot the response vs. time traces
       plotResponses(x, delays(ii), V, pulse);
