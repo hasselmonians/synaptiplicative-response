@@ -52,7 +52,7 @@ figlib.pretty('PlotBuffer', 0.2)
 % generate model
 % x = model();
 % set the leak current reversal potential to -70 mV
-x.set('*Leak.gbar', -70);
+x.set('*Leak.E', -70);
 % set the synaptic strength of the second presynaptic compartment to 30 μS
 x.Dendrite.NMDAergicPresynaptic2.gmax = 30;
 
@@ -70,7 +70,7 @@ for ii = 1:length(gmaxes)
   corelib.textbar(ii, length(gmaxes))
   % set the synaptic strength of the first presynaptic compartment
   x.Dendrite.NMDAergicPresynaptic1.gmax = gmaxes(ii);
-  [responses(ii), ~, crossings(ii), pulseDelays(ii, :)] = plotDelay(x, threshold, delay, true)
+  [responses(ii), ~, crossings(ii), pulseDelays(ii, :)] = plotDelay(x, threshold, delay, true);
 end
 
 % scale the crossings and pulse delays to milliseconds
