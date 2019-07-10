@@ -58,19 +58,19 @@ function [responses, delays, crossings, pulseDelays] = plotDelay(x, threshold, d
     end % do_not_plot
   end % ii
 
-  if do_not_plot == true
-    return
-  end
+  if do_not_plot == false
 
-  %% Plot the response height as a function of delay
-  f = figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
+    % plot the response height as a function of delays
+    f = figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
+
     plot(delays, responses / responses(1), 'ok')
 
+    xlabel('delays (ms)')
+    ylabel('response height (mV)')
+    title('response height as function of delay')
 
-  xlabel('delay (ms)')
-  ylabel('response height (mV)')
-  title('response height as function of delay')
+    figlib.pretty('PlotBuffer', 0.2);
 
-  figlib.pretty('PlotBuffer', 0.2);
+  end % do_not_plot
 
 end % function
