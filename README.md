@@ -10,7 +10,7 @@ You will need [xolotl](https://github.com/sg-s/xolotl) and dependencies, [xgrid]
 `xfit` should be installed via git (or by downloading the zip).
 Make sure `xolotl` and its dependencies are on your MATLAB path.
 
-If you install `xolotl` using the [MATLAB toolbox](https://xolotl.readthedocs.io/en/master/tutorials/start-here/#installing-xolotl), you only need `xfit`.
+If you install `xolotl` using the [MATLAB toolbox](https://xolotl.readthedocs.io/en/master/tutorials/start-here/#installing-xolotl), you only need `xfit` and `xgrid`.
 
 If you install via git, you also need [cpplab](https://github.com/sg-s/cpplab),
 [mtools](https://github.com/sg-s/srinivas.gs_mtools), and [puppeteer](https://github.com/sg-s/puppeteer).
