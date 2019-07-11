@@ -5,7 +5,7 @@ response in NMDA synapses.
 
 ## Installing
 
-You will need [xolotl](https://github.com/sg-s/xolotl) and dependencies and [xfit](https://github.com/sg-s/xfit).
+You will need [xolotl](https://github.com/sg-s/xolotl) and dependencies, [xgrid](https://github.com/sg-s/xfit) and [xfit](https://github.com/sg-s/xfit).
 `xolotl` can be installed via a MATLAB toolbox or through git.
 `xfit` should be installed via git (or by downloading the zip).
 Make sure `xolotl` and its dependencies are on your MATLAB path.
