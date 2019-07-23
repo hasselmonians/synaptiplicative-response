@@ -92,7 +92,7 @@ figlib.pretty()
 params = [28 5; 28 15; 28 28; 40 40; 50 50; 60 60];
 
 for ii = 1:size(params, 1)
-  x.set(param_names, params(ii, :))
+  x.set(param_names, params(ii, :));
   plotResponses(x);
   % add a title based on the model parameters
   title([mat2str(params(ii, :))])
