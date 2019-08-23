@@ -8,7 +8,7 @@ function [responses, V, pulse, delay] = simulate(x, delay, V_clamp)
   %   V_clamp: a 3x1 vector containing the resting potential (where V starts at t = dt)
   %% Outputs:
   %   responses: a 3x1 vector containing the response heights for the three conditions
-  %   V: an n x 1 vector containing the membrane potential
+  %   V: an n x 3 vector containing the membrane potential
   %     for the Dendritic compartment for each trial
 
   if ~exist('delay', 'var')
