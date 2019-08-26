@@ -27,7 +27,9 @@ else
   corelib.verb(true, 'INFO', 'beginning simulation')
 
   % invoke a parallel pool using default, local settings
-  gcp('nocreate')
+  if isempty(gcp('nocreate'))
+    parpool
+  end
 
   % fetch the parameter names
   param_names = x.find('Dendrite*NMDAergic*gmax');
