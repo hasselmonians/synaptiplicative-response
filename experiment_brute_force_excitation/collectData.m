@@ -32,7 +32,7 @@ else
   end
 
   % fetch the parameter names
-  param_names = x.find('Dendrite*NMDAergic*gmax');
+  param_names = x.find('Dendrite*gmax');
 
   % container for parameter values
   [X, Y] = meshgrid(gmax, gmax);
