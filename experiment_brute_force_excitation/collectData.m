@@ -35,3 +35,23 @@ else
   % container for parameter values
   [X, Y] = meshgrid(gmax, gmax);
   all_params = [X(:), Y(:)]';
+
+  % perform the simulations in parallel
+  responses_unsorted = NaN(3, length(all_params));
+  parfor ii = 1:length(all_params);
+    x.reset;
+    x.set(param_names, all_params(:, ii));
+    responses_unsorted(:, ii) = simulate(x);
+  end
+
+  % post-process the data to get back matrices
+  responses = zeros(length(gmax), length(gmax), 3);
+  for ii = 1:length(all_params)
+    xx = find(all_params(1, ii) == gmax);
+    yy = find(all_params(2, ii) == gmax);
+    responses(xx, yy, :) = responses_unsorted(:, ii);
+  end
+
+  save('experiment_brute_force_excitation/responses.mat', 'responses', 'param_names', 'all_params', 'x');
+
+end
