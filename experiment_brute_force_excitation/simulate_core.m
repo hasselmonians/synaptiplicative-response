@@ -27,7 +27,8 @@ function [r, V] = simulate_core(x, comps, trial, pulse_AMPA, pulse_NMDA)
   end
 
   % clamp the specified compartments
-  x.V_clamp     = V_clamp;
+  % x.V_clamp     = V_clamp;
+  x.set('V_clamp', V_clamp);
   % perform the simulation
   V             = x.integrate;
   % compute the EPSP amplitude
