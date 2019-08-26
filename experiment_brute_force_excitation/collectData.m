@@ -33,4 +33,5 @@ else
   param_names = x.find('Dendrite*NMDAergic*gmax');
 
   % container for parameter values
-  
+  [X, Y] = meshgrid(gmax, gmax);
+  all_params = [X(:), Y(:)]';
