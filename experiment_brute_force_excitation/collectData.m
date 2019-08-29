@@ -12,6 +12,7 @@
 % will be varied.
 
 x = model();
+x.integrate;
 
 % equidistant grid for synaptic maximal conductances
 gmax = 0:0.2:60;
@@ -40,9 +41,10 @@ else
 
   % perform the simulations in parallel
   responses_unsorted = NaN(3, length(all_params));
-  parfor ii = 1:length(all_params);
-    x.reset;
+  for ii = 1:length(all_params)
+    corelib.verb(true, 'parallel', ['simulation #' num2str(ii)])
     x.set(param_names, all_params(:, ii));
+    x.reset;
     responses_unsorted(:, ii) = simulate(x);
   end
 
