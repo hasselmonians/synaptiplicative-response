@@ -90,3 +90,22 @@ for ii = 1:size(params, 1)
   % add a title based on the model parameters
   title([mat2str(params(ii, :))])
 end
+
+%% Plot the responses for a single AMPAergic synaptic strength
+
+NMDA_response = squeeze(responses(find(gmax == 1), :, :)); % fix g_AMPA = 1 uS
+figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
+
+subplot(1, 2, 1);
+plot(gmax, NMDA_response);
+legend({'AMPA', 'NMDA', 'AMPA & NMDA'})
+xlabel('AMPAergic synaptic strength (\mu S)')
+ylabel('response height (mV)')
+
+subplot(1, 2, 2);
+plot(gmax, (NMDA_response(:, 3) - NMDA_response(:, 2)) ./ NMDA_response(:, 1));
+legend({'mult. increase'})
+xlabel('AMPAergic synaptic strength (\mu S)')
+ylabel('response height (mV)')
+
+figlib.pretty('PlotBuffer', 0.1);
