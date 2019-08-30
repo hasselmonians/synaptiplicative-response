@@ -82,7 +82,7 @@ figlib.pretty()
 
 %% Plot selected time series
 
-params = [28 5; 28 15; 28 28; 40 40; 50 50; 60 60];
+params = [5 5; 10 5; 5 10; 10 10];
 
 for ii = 1:size(params, 1)
   x.set(param_names, params(ii, :));
