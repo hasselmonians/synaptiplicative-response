@@ -56,6 +56,6 @@ else
     responses(xx, yy, :) = responses_unsorted(:, ii);
   end
 
-  save('experiment_brute_force_excitation/responses.mat', 'responses', 'param_names', 'all_params', 'x');
+  save('experiment_brute_force_excitation/responses.mat', 'responses', 'param_names', 'all_params', 'x', 'gmax');
 
 end
