@@ -15,7 +15,7 @@ x = model();
 x.integrate;
 
 % equidistant grid for synaptic maximal conductances
-gmax = 0:0.2:60;
+gmax = 0:0.2:20;
 
 %% Perform the simulation
 % If the simulation has already been performed, load it.
