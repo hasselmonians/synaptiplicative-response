@@ -6,7 +6,7 @@ load('responses.mat')
 % if not, load some defaults
 
 if ~exist('param_names', 'var')
-  param_names = x.find('Dendrite*NMDAergic*gmax');
+  param_names = x.find('Dendrite*gmax');
 end
 
 if ~exist('x', 'var')
