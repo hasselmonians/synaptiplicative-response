@@ -82,7 +82,7 @@ figlib.pretty()
 
 %% Plot selected time series
 
-params = [5 5; 10 5; 5 10; 10 10];
+params = [1 5; 1 10; 1 20;];
 
 for ii = 1:size(params, 1)
   x.set(param_names, params(ii, :));
@@ -97,15 +97,17 @@ NMDA_response = squeeze(responses(find(gmax == 1), :, :)); % fix g_AMPA = 1 uS
 figure('outerposition',[100 100 1000 800],'PaperUnits','points','PaperSize',[1000 800]); hold on
 
 subplot(1, 2, 1);
-plot(gmax, NMDA_response);
-legend({'AMPA', 'NMDA', 'AMPA & NMDA'})
+plot(gmax, NMDA_response, 'o');
+legend({'AMPA', 'NMDA', 'AMPA & NMDA'}, 'Location', 'northwest')
 xlabel('AMPAergic synaptic strength (\mu S)')
 ylabel('response height (mV)')
+box off
 
 subplot(1, 2, 2);
-plot(gmax, (NMDA_response(:, 3) - NMDA_response(:, 2)) ./ NMDA_response(:, 1));
+plot(gmax, (NMDA_response(:, 3) - NMDA_response(:, 1)) ./ NMDA_response(:, 2), 'o');
 legend({'mult. increase'})
 xlabel('AMPAergic synaptic strength (\mu S)')
 ylabel('response height (mV)')
+box off
 
 figlib.pretty('PlotBuffer', 0.1);
