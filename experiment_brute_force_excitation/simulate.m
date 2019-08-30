@@ -36,6 +36,6 @@ function [responses, V, pulse_AMPA, pulse_NMDA] = simulate(x)
   pulse_NMDA        = -90 * ones(length(V), 1);
   pulse_NMDA(pulseStart_NMDA:pulseStop_NMDA) = pulseHeight_NMDA;
 
-  [response(1), V(:,1)]   = simulate_core(x, comps, 1, pulse_AMPA, pulse_NMDA);
-  [response(2), V(:,2)]   = simulate_core(x, comps, 2, pulse_AMPA, pulse_NMDA);
-  [response(3), V(:,3)]   = simulate_core(x, comps, 3, pulse_AMPA, pulse_NMDA);
+  [responses(1), V(:,1)]   = simulate_core(x, comps, 1, pulse_AMPA, pulse_NMDA);
+  [responses(2), V(:,2)]   = simulate_core(x, comps, 2, pulse_AMPA, pulse_NMDA);
+  [responses(3), V(:,3)]   = simulate_core(x, comps, 3, pulse_AMPA, pulse_NMDA);
