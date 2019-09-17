@@ -8,7 +8,7 @@ function plotResponses(x)
   %     expects one ready to go into the simulate function
 
   % perform the computation and save the three responses and the pulse waveform
-  [~, V, pulse] = simulate(x);
+  [~, V, pulse, pulse2] = simulate(x);
 
   %% Generate the figure to plot on
 
@@ -31,6 +31,7 @@ function plotResponses(x)
 
   % plot the waveform pulse
   plot(ax(2), time, pulse, 'k');
+  plot(ax(2), time, pulse2, 'r');
 
   % plot the NMDAergic current trace
   % for ii = 1:2
@@ -48,6 +49,7 @@ function plotResponses(x)
 
   % add the legend
   legend(ax(1), leg);
+  legend(ax(2), {'pre-AMPA', 'pre-NMDA'})
 
   % make the figure pretty
   figlib.pretty('PlotBuffer', 0.2)
